@@ -24,7 +24,7 @@ DEPARTMENT_ID = []
 
 def AbrirArchivo():
     """Esta función es para cargar la tabla desde un archivo"""
-    archivo = open('c:/Users/Lenovo/Desktop/Python/basededatos.txt','r',)
+    archivo = open('C:/Users/User/OneDrive/Escritorio/python-course/Progs/Arbol.txt','r',)
     formato = archivo.readline().rstrip()
     formato = formato.split(',')
     lin = []
@@ -62,62 +62,140 @@ def AbrirArchivo():
 
     archivo.close()
 #------------------------------------------------------------------------------------------
-def select():#forma de introducir elementos:>>select employee_id,first_name
+def imprime(sel, index):
+    for el in sel:
+        if el.upper() == "EMPLOYEE_ID":
+            for i in range(0,6-len(EMPLOYEE_ID[index])):
+                print(f" ", end='')
+            print(f"{EMPLOYEE_ID[index]} | ", end='')
+        elif el.upper() == "FIRST_NAME":
+            for i in range(0,20-len(FIRST_NAME[index])):
+                print(f" ", end='')
+            print(f"{FIRST_NAME[index]} | ", end='')
+        elif el.upper() == "LAST_NAME":
+            for i in range(0,25-len(LAST_NAME[index])):
+                print(f" ", end='')
+            print(f"{LAST_NAME[index]} | ", end='')
+        elif el.upper() == "EMAIL":
+            for i in range(0,25-len(EMAIL[index])):
+                print(f" ", end='')
+            print(f"{EMAIL[index]} | ", end='')
+        elif el.upper() == "PHONE_NUMBER":
+            for i in range(0,20-len(PHONE_NUMBER[index])):
+                print(f" ", end='')
+            print(f"{PHONE_NUMBER[index]} | ", end='')
+        elif el.upper() == "HIRE_DATE":
+            for i in range(0,8-len(HIRE_DATE[index])):
+                print(f" ", end='')
+            print(f"{HIRE_DATE[index]} | ", end='')
+        elif el.upper() == "JOB_ID":
+            for i in range(0,10-len(JOB_ID[index])):
+                print(f" ", end='')
+            print(f"{JOB_ID[index]} | ", end='')
+        elif el.upper() == "SALARY":
+            for i in range(0,8-len(SALARY[index])):
+                print(f" ", end='')
+            print(f"{SALARY[index]} | ", end='')
+        elif el.upper() == "COMMISSION_PCT":
+            for i in range(0,4-len(COMMISSION_PCT[index])):
+                print(f" ", end='')
+            print(f"{COMMISSION_PCT[index]} | ", end='')
+        elif el.upper() == "MANAGER_ID":
+            for i in range(0,6-len(MANAGER_ID[index])):
+                print(f" ", end='')
+            print(f"{MANAGER_ID[index]} | ", end='')
+        elif el.upper() == "DEPARTMENT_ID":
+            for i in range(0,6-len(DEPARTMENT_ID[index])):
+                print(f" ", end='')
+            print(f"{DEPARTMENT_ID[index]} | ", end='')
+    print()
+
+#------------------------------------------------------------------------------------------
+def select():
     listas = input(">> ").split()
     sel = listas[1].split(',')
-    if listas[1] == "*":
-        pass
-    else:
-        for index in range(0,len(EMPLOYEE_ID)):
-            for el in sel:
-                if el.upper() == "EMPLOYEE_ID":
-                    if index==0:
-                        print("EMPLOYEE_ID | ")
-                    print(f"        {EMPLOYEE_ID[index]} | ", end='')
-                elif el.upper() == "FIRST_NAME":
-                    if index==0:
-                        print("EMPLOYEE_ID | ")
-                    print(f"{FIRST_NAME[index]} | ", end='')
-                elif el.upper() == "LAST_NAME":
-                    if index==0:
-                        print("EMPLOYEE_ID | ")
-                    print(f"{LAST_NAME[index]} | ", end='')
-                elif el.upper() == "EMAIL":
-                    if index==0:
-                        print("EMPLOYEE_ID | ")
-                    print(f"{EMAIL[index]} | ", end='')
-                elif el.upper() == "PHONE_NUMBER":
-                    if index==0:
-                        print("EMPLOYEE_ID | ")
-                    print(f"{PHONE_NUMBER[index]} | ", end='')
-                elif el.upper() == "HIRE_DATE":
-                    if index==0:
-                        print("EMPLOYEE_ID | ")
-                    print(f"{HIRE_DATE[index]} | ", end='')
-                elif el.upper() == "JOB_ID":
-                    if index==0:
-                        print("EMPLOYEE_ID | ")
-                    print(f"{JOB_ID[index]} | ", end='')
-                elif el.upper() == "SALARY":
-                    if index==0:
-                        print("EMPLOYEE_ID | ")
-                    print(f"{SALARY[index]} | ", end='')
-                elif el.upper() == "COMMISSION_PCT":
-                    if index==0:
-                        print("EMPLOYEE_ID | ")
-                    print(f"{COMMISSION_PCT[index]} | ", end='')
-                elif el.upper() == "MANAGER_ID":
-                    if index==0:
-                        print("EMPLOYEE_ID | ")
-                    print(f"{MANAGER_ID[index]} | ", end='')
-                elif el.upper() == "DEPARTMENT_ID":
-                    if index==0:
-                        print("EMPLOYEE_ID | ")
-                    print(f"{DEPARTMENT_ID[index]} | ", end='')
-            print()
+    # if listas[1] == "*":
+    #     for index in range(0,len(EMPLOYEE_ID)):
+    #         print ("{0:6s} | {1:20s} | {2:25s} | {3:25s} | {4:20s} | {5:8s} | {6:10s} | {7:8s} | {8:4s} | {9:6s} | {10:6s} |".format(EMPLOYEE_ID[index],FIRST_NAME[index],LAST_NAME[index],EMAIL[index],PHONE_NUMBER[index],HIRE_DATE[index],JOB_ID[index],SALARY[index],COMMISSION_PCT[index],MANAGER_ID[index],DEPARTMENT_ID[index]))
+    # else:
+    #     for index in range(0,len(EMPLOYEE_ID)):
+    #         imprime(sel, index)
+    return sel
 
-def where():
-    pass
+def toda(index):
+    print ("{0:6s} | {1:20s} | {2:25s} | {3:25s} | {4:20s} | {5:8s} | {6:10s} | {7:8s} | {8:4s} | {9:6s} | {10:6s} |".format(EMPLOYEE_ID[index],FIRST_NAME[index],LAST_NAME[index],EMAIL[index],PHONE_NUMBER[index],HIRE_DATE[index],JOB_ID[index],SALARY[index],COMMISSION_PCT[index],MANAGER_ID[index],DEPARTMENT_ID[index]))
+
+def where(campos):#Forma de introducir: where department_id=9;
+    si = input(">> ").replace(";","").split()
+    si = si[1].split('=')
+    for index in range(0,len(EMPLOYEE_ID)):
+        if si[0].upper() == "EMPLOYEE_ID":
+            if EMPLOYEE_ID[index] == si[1]:
+                if campos[0]=="*":
+                    toda(index)
+                else:
+                    imprime(campos,index)
+        elif si[0].upper() == "FIRST_NAME":
+            if FIRST_NAME[index] == si[1]:
+                if campos[0]=="*":
+                    toda(index)
+                else:
+                    imprime(campos,index)
+        elif si[0].upper() == "LAST_NAME":
+            if LAST_NAME[index] == si[1]:
+                if campos[0]=="*":
+                    toda(index)
+                else:
+                    imprime(campos,index)
+        elif si[0].upper() == "EMAIL":
+            if EMAIL[index] == si[1]:
+                if campos[0]=="*":
+                    toda(index)
+                else:
+                    imprime(campos,index)
+        elif si[0].upper() == "PHONE_NUMBER":
+            if PHONE_NUMBER[index] == si[1]:
+                if campos[0]=="*":
+                    toda(index)
+                else:
+                    imprime(campos,index)
+        elif si[0].upper() == "HIRE_DATE":
+            if HIRE_DATE[index] == si[1]:
+                if campos[0]=="*":
+                    toda(index)
+                else:
+                    imprime(campos,index)
+        elif si[0].upper() == "JOB_ID":
+            if JOB_ID[index] == si[1]:
+                if campos[0]=="*":
+                    toda(index)
+                else:
+                    imprime(campos,index)
+        elif si[0].upper() == "SALARY":
+            if SALARY[index] == si[1]:
+                if campos[0]=="*":
+                    toda(index)
+                else:
+                    imprime(campos,index)
+        elif si[0].upper() == "COMMISSION_PCT":
+            if COMMISSION_PCT[index] == si[1]:
+                if campos[0]=="*":
+                    toda(index)
+                else:
+                    imprime(campos,index)
+        elif si[0].upper() == "MANAGER_ID":
+            if MANAGER_ID[index] == si[1]:
+                if campos[0]=="*":
+                    toda(index)
+                else:
+                    imprime(campos,index)
+        elif si[0].upper() == "DEPARTMENT_ID":
+            if DEPARTMENT_ID[index] == si[1]:
+                if campos[0]=="*":
+                    toda(index)
+                else:
+                   imprime(campos,index)
+
 
 def diccionario():
 #yo
@@ -129,7 +207,7 @@ AbrirArchivo()
 #inst1 = input(">> ").split()
 #sel = inst1[1].split(',')
 #inst3 = input(">> ").split()
-select()
-where()
+num = select()
+where(num)
 
 #---------------------------------------------------------------------------------
