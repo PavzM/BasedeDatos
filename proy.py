@@ -271,7 +271,7 @@ class Diccionario_1(wx.grid.Grid):
         self.SetCellValue(8, 4,"0.0")
         self.SetCellValue(9, 4,"00001")
         self.SetCellValue(10, 4,"00001")
-        
+
         self.SetCellValue(0, 5,"0000001")
         self.SetCellValue(5, 5,"01/01/87")
         self.SetCellValue(7, 5,"0000001")
@@ -286,6 +286,15 @@ class Diccionario_1(wx.grid.Grid):
         self.SetCellValue(9, 6,"10000")
         self.SetCellValue(10, 6,"10000")
 
+
+    def EnableEditing(self, edit):
+        return super().EnableEditing(edit)
+
+    def AutoSize(self):
+        return super().AutoSize()
+
+    def DisableDragGridSize(self):
+        return super().DisableDragGridSize()
 #----------------------TABLA--------------------------------------------#
 #Pag 159: http://index-of.co.uk/Tutorials/wxPython%20in%20Action.pdf
 
@@ -349,6 +358,9 @@ class TestFrame(wx.Frame):
         grid.AutoSize()
         grid.EnableEditing(False)
         grid.DisableDragGridSize()
+        grid_1.AutoSize()
+        grid_1.EnableEditing(False)
+        grid_1.DisableDragGridSize()
 
         self.InitUI()
 
