@@ -9,6 +9,8 @@ Practica de Bases de Datos. NRC:31505
     Tomas Chapital Cesar         201739585
 
 """
+import wx
+import wx.grid
 
 EMPLOYEE_ID = []
 FIRST_NAME = []
@@ -22,9 +24,18 @@ COMMISSION_PCT = []
 MANAGER_ID = []
 DEPARTMENT_ID = []
 
+###Diccionario
+FIELD = []
+INI_P = []
+TAM_FIELD = []
+LENGHT = []
+TYPE = []
+I_VAL = []
+L_VAL = []
+
 def AbrirArchivo():
     """Esta función es para cargar la tabla desde un archivo"""
-    archivo = open('C:/Users/User/OneDrive/Escritorio/python-course/Progs/Arbol.txt','r',)
+    archivo = open('c:/Users/Lenovo/Desktop/Python/basededatos.txt','r',)
     formato = archivo.readline().rstrip()
     formato = formato.split(',')
     lin = []
@@ -62,6 +73,41 @@ def AbrirArchivo():
 
     archivo.close()
 #------------------------------------------------------------------------------------------
+def Diccionario():
+    archivo = open('c:/Users/Lenovo/Desktop/Python/basededatos.txt','r',)
+    cadena = archivo.readline().rstrip()
+    cadena= cadena.split(',')#aqui estan las palabras de los campos con las posiciones
+    lin=[]
+    ind=0
+    src=0
+    i=0
+    j=0
+    for imp in cadena:
+        if imp.isnumeric():
+            lin.append(int(imp))
+            if ind > 0 and not (ind%2)==0:
+                TAM_FIELD.append(str(lin[ind] - (lin[ind-1]-1)))
+            ind = ind + 1
+        else:
+            FIELD.append(imp)
+    for port in cadena:
+        if port.isnumeric():
+            if  (src%2)==0:
+                num=int(port)-1
+                INI_P.append(str(num))
+                src=src+1
+            else:
+                src=src+1
+    """for cas in FIELD:
+        print(FIELD[i],end="            ")
+        print(INI_P[i],end="             ")
+        print(TAM_FIELD[i],end="             ")
+        i=i+1
+        print("")"""
+    #esta parte requiere de los datos pasados a tabla
+    # EN DISCUCION DE MOMENTO ESTATICO
+    archivo.close()
+#------------------------------------------------------------------------------
 def imprime(sel, index):
     for el in sel:
         if el.upper() == "EMPLOYEE_ID":
@@ -114,12 +160,6 @@ def imprime(sel, index):
 def select():
     listas = input(">> ").split()
     sel = listas[1].split(',')
-    # if listas[1] == "*":
-    #     for index in range(0,len(EMPLOYEE_ID)):
-    #         print ("{0:6s} | {1:20s} | {2:25s} | {3:25s} | {4:20s} | {5:8s} | {6:10s} | {7:8s} | {8:4s} | {9:6s} | {10:6s} |".format(EMPLOYEE_ID[index],FIRST_NAME[index],LAST_NAME[index],EMAIL[index],PHONE_NUMBER[index],HIRE_DATE[index],JOB_ID[index],SALARY[index],COMMISSION_PCT[index],MANAGER_ID[index],DEPARTMENT_ID[index]))
-    # else:
-    #     for index in range(0,len(EMPLOYEE_ID)):
-    #         imprime(sel, index)
     return sel
 
 def toda(index):
@@ -197,17 +237,153 @@ def where(campos):#Forma de introducir: where department_id=9;
                    imprime(campos,index)
 
 
-def diccionario():
-#yo
-    pass
+class Diccionario_1(wx.grid.Grid):
+    def __init__(self, parent):
+        wx.grid.Grid.__init__(self, parent, -1)
+        self.CreateGrid(len(FIELD),7)
+    #------------------------------------------------------Columnas
+        self.SetColLabelValue(0, "FIELD_NAME")
+        self.SetColLabelValue(1, "INITIAL_POSITON")
+        self.SetColLabelValue(2, "LENGHT")
+        self.SetColLabelValue(3, "TYPE")
+        self.SetColLabelValue(4, "INITIAL_VALUE")
+        self.SetColLabelValue(5, "LOWEST_VALUE")
+        self.SetColLabelValue(6, "HIGHEST_VALUE")
+    #-------------------------------------------------------------
+        for i in range(0,len(FIELD)):
+            self.SetCellValue(i, 0, FIELD[i])
+            self.SetCellValue(i, 1, INI_P[i])
+            self.SetCellValue(i, 2, TAM_FIELD[i])
+        self.SetCellValue(0, 3,"NUMBER")
+        self.SetCellValue(1, 3,"VARCHAR")
+        self.SetCellValue(2, 3,"VARCHAR")
+        self.SetCellValue(3, 3,"VARCHAR")
+        self.SetCellValue(4, 3,"VARCHAR")
+        self.SetCellValue(5, 3,"DATE")
+        self.SetCellValue(6, 3,"VARCHAR")
+        self.SetCellValue(7, 3,"NUMBER")
+        self.SetCellValue(8, 3,"NUMBER")
+        self.SetCellValue(9, 3,"NUMBER")
+        self.SetCellValue(10, 3,"NUMBER")
+        self.SetCellValue(0, 4,"0000001")
+        self.SetCellValue(5, 4,"01/01/87")
+        self.SetCellValue(7, 4,"0000001")
+        self.SetCellValue(8, 4,"0.0")
+        self.SetCellValue(9, 4,"00001")
+        self.SetCellValue(10, 4,"00001")
+        
+        self.SetCellValue(0, 5,"0000001")
+        self.SetCellValue(5, 5,"01/01/87")
+        self.SetCellValue(7, 5,"0000001")
+        self.SetCellValue(8, 5,"0.0")
+        self.SetCellValue(9, 5,"00001")
+        self.SetCellValue(10, 5,"00001")
+
+        self.SetCellValue(0, 6,"1000000")
+        self.SetCellValue(5, 6,"10/11/2020")
+        self.SetCellValue(7, 6,"1000000")
+        self.SetCellValue(8, 6,"1.0")
+        self.SetCellValue(9, 6,"10000")
+        self.SetCellValue(10, 6,"10000")
+
+#----------------------TABLA--------------------------------------------#
+#Pag 159: http://index-of.co.uk/Tutorials/wxPython%20in%20Action.pdf
+
+
+class SimpleGrid(wx.grid.Grid):
+    def __init__(self, parent):
+        wx.grid.Grid.__init__(self, parent, -1)
+        self.CreateGrid(106, 11)
+    #------------------------------------------------------Columnas
+        self.SetColLabelValue(0, "EMPLOYEE_ID")
+        self.SetColLabelValue(1, "FIRST_NAME")
+        self.SetColLabelValue(2, "LAST_NAME")
+        self.SetColLabelValue(3, "EMAIL")
+        self.SetColLabelValue(4, "PHONE_NUMBER")
+        self.SetColLabelValue(5, "HIRE_DATE")
+        self.SetColLabelValue(6, "JOB_ID")
+        self.SetColLabelValue(7, "SALARY")
+        self.SetColLabelValue(8, "COMMISSION_PCT")
+        self.SetColLabelValue(9, "MANAGER_ID")
+        self.SetColLabelValue(10, "DEPARTMENT_ID")
+    #-------------------------------------------------------------
+        for i in range(0,len(EMPLOYEE_ID)):
+            self.SetCellValue(i, 0, EMPLOYEE_ID[i])
+            self.SetCellValue(i, 1, FIRST_NAME[i])
+            self.SetCellValue(i, 2, LAST_NAME[i])
+            self.SetCellValue(i, 3, EMAIL[i])
+            self.SetCellValue(i, 4, PHONE_NUMBER[i])
+            self.SetCellValue(i, 5, HIRE_DATE[i])
+            self.SetCellValue(i, 6, JOB_ID[i])
+            self.SetCellValue(i, 7, SALARY[i])
+            self.SetCellValue(i, 8, COMMISSION_PCT[i])
+            self.SetCellValue(i, 9, MANAGER_ID[i])
+            self.SetCellValue(i, 10, DEPARTMENT_ID[i])
+
+    def EnableEditing(self, edit):
+        return super().EnableEditing(edit)
+
+    def AutoSize(self):
+        return super().AutoSize()
+
+    def DisableDragGridSize(self):
+        return super().DisableDragGridSize()
+
+
+class TestFrame(wx.Frame):
+    def __init__(self, parent):
+        wx.Frame.__init__(self, parent, -1, "PROYECTO BASE DE DATOS ^u^", size=(1090, 500))
+
+        Panel = wx.Panel(self)
+        Notebook = wx.Notebook(Panel)
+        grid = SimpleGrid(Notebook)#wx.Panel(Notebook)
+        grid_1 = Diccionario_1(Notebook)
+        page_1 = wx.Panel(Notebook)
+        a = wx.StaticText(page_1, -1, "Aca sale el resultado <3")
+        Notebook.AddPage(grid, "EMPLOYEES")
+        Notebook.AddPage(grid_1, "DICCIONARIO")
+        Notebook.AddPage(page_1, "RESULTADO")
+        sizer = wx.BoxSizer()
+        sizer.Add(Notebook, 1, wx.EXPAND)
+        Panel.SetSizer(sizer)
+        grid.AutoSize()
+        grid.EnableEditing(False)
+        grid.DisableDragGridSize()
+
+        self.InitUI()
+
+    def InitUI(self):
+
+        menubar = wx.MenuBar()
+        fileMenu = wx.Menu()
+        fileItem = fileMenu.Append(wx.ID_EXIT, 'Opcion A', 'Quit application')
+        fileItem = fileMenu.Append(wx.ID_EXIT, 'Opcion B', 'Quit application')
+        fileItem = fileMenu.Append(wx.ID_EXIT, 'Quit', 'Quit application')
+        menubar.Append(fileMenu, '&OPCIONES')
+        self.SetMenuBar(menubar)
+
+        self.Bind(wx.EVT_MENU, self.OnQuit, fileItem)
+
+        #self.SetTitle('Simple menu')
+        self.Centre()
+
+    def OnQuit(self, e):
+        self.Close()
+
+if __name__ == '__main__':
+    AbrirArchivo()
+    Diccionario()
+    app = wx.App()
+    frame = TestFrame(None)
+    frame.Show(True)
+    app.MainLoop()
 
 
 
-AbrirArchivo()
 #inst1 = input(">> ").split()
 #sel = inst1[1].split(',')
 #inst3 = input(">> ").split()
-num = select()
-where(num)
+#num = select()
+#where(num)
 
 #---------------------------------------------------------------------------------
