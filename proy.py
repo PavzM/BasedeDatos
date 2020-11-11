@@ -35,7 +35,8 @@ L_VAL = []
 
 def AbrirArchivo():
     """Esta función es para cargar la tabla desde un archivo"""
-    archivo = open('c:/Users/Lenovo/Desktop/Python/basededatos.txt','r',)
+    #archivo = open('c:/Users/Lenovo/Desktop/Python/basededatos.txt','r',)
+    archivo = open('/home/pavz/Documents/GitHub/BaseDeDAtos/basededatos.txt','r',)
     formato = archivo.readline().rstrip()
     formato = formato.split(',')
     lin = []
@@ -271,7 +272,7 @@ class Diccionario_1(wx.grid.Grid):
         self.SetCellValue(8, 4,"0.0")
         self.SetCellValue(9, 4,"00001")
         self.SetCellValue(10, 4,"00001")
-        
+
         self.SetCellValue(0, 5,"0000001")
         self.SetCellValue(5, 5,"01/01/87")
         self.SetCellValue(7, 5,"0000001")
