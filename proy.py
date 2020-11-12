@@ -75,7 +75,8 @@ def AbrirArchivo():
     archivo.close()
 #------------------------------------------------------------------------------------------
 def Diccionario():
-    archivo = open('c:/Users/Lenovo/Desktop/Python/basededatos.txt','r',)
+    #archivo = open('c:/Users/Lenovo/Desktop/Python/basededatos.txt','r',)
+    archivo = open('/home/pavz/Documents/GitHub/BaseDeDAtos/basededatos.txt','r',)
     cadena = archivo.readline().rstrip()
     cadena= cadena.split(',')#aqui estan las palabras de los campos con las posiciones
     lin=[]
