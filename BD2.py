@@ -1,13 +1,10 @@
 """
-
 Practica de Bases de Datos. NRC:31505
-
     Reyes Murrieta Guadalupe     201733820
     Perez Armas Bardo Absalon    201708982
     Espinoza Bigurra Asael       201702598
     Medel Perez Pavel Jesus      201726903
     Tomas Chapital Cesar         201739585
-
 """
 import wx
 import wx.grid
@@ -35,7 +32,8 @@ L_VAL = []
 
 def AbrirArchivo():
     """Esta función es para cargar la tabla desde un archivo"""
-    archivo = open('c:/Users/User/OneDrive/Escritorio/python-course/Progs/Arbol.txt','r',)
+
+    archivo = open('c:/Users/Lenovo/Desktop/Python/basededatos.txt','r')
     formato = archivo.readline().rstrip()
     formato = formato.split(',')
     lin = []
@@ -74,7 +72,7 @@ def AbrirArchivo():
     archivo.close()
 #------------------------------------------------------------------------------------------
 def Diccionario():
-    archivo = open('c:/Users/User/OneDrive/Escritorio/python-course/Progs/Arbol.txt','r',)
+    archivo = open('c:/Users/Lenovo/Desktop/Python/basededatos.txt','r')
     cadena = archivo.readline().rstrip()
     cadena= cadena.split(',')#aqui estan las palabras de los campos con las posiciones
     lin=[]
@@ -271,7 +269,7 @@ class Diccionario_1(wx.grid.Grid):
         self.SetCellValue(8, 4,"0.0")
         self.SetCellValue(9, 4,"00001")
         self.SetCellValue(10, 4,"00001")
-        
+
         self.SetCellValue(0, 5,"0000001")
         self.SetCellValue(5, 5,"01/01/87")
         self.SetCellValue(7, 5,"0000001")
@@ -285,7 +283,7 @@ class Diccionario_1(wx.grid.Grid):
         self.SetCellValue(8, 6,"1.0")
         self.SetCellValue(9, 6,"10000")
         self.SetCellValue(10, 6,"10000")
-    
+
     def EnableEditing(self, edit):
         return super().EnableEditing(edit)
 
@@ -328,7 +326,7 @@ class SimpleGrid(wx.grid.Grid):
             self.SetCellValue(i, 8, COMMISSION_PCT[i])
             self.SetCellValue(i, 9, MANAGER_ID[i])
             self.SetCellValue(i, 10, DEPARTMENT_ID[i])
-        
+
         self.AutoSize()
         self.EnableEditing(False)
         self.DisableDragGridSize()
@@ -341,7 +339,7 @@ class SimpleGrid(wx.grid.Grid):
 
     def DisableDragGridSize(self):
         return super().DisableDragGridSize()
-    
+
 
 class TestFrame(wx.Frame):
     def __init__(self, parent):
@@ -350,12 +348,12 @@ class TestFrame(wx.Frame):
 
     def InitUI(self):
         Notebook = wx.Notebook(self)
-        
+
         page = wx.SplitterWindow(Notebook)
         page2 = MyPanel2(Notebook)
         page3 = MyPanel3(Notebook)
 
-        Notebook.AddPage(page,"EMPLOYEES") 
+        Notebook.AddPage(page,"EMPLOYEES")
         Notebook.AddPage(page2,"DICCIONARIO")
         Notebook.AddPage(page3,"RESULTADO")
 
@@ -388,30 +386,35 @@ class Operaciones(wx.Panel):
         super(Operaciones, self).__init__(parent)
         wx.StaticBox(self, label='Instrucciones', pos=(0, 0), size=(1060, 145))
         lbl1 = wx.StaticText(self, label="SELECT ", pos=(15,30))#, pos=(0,0)
-        lbl2 = wx.StaticText(self, label="FROM EMPLOYEES;", pos=(15,70))
+        self.editname = wx.TextCtrl(self, value="", pos=(65, 25), size=(140,-1))
+        lbl2 = wx.StaticText(self, label="FROM ", pos=(15,70))
+        #self.dateLbl = wx.StaticBox(self,10, 'Date Range:', size=(40, 15))
+        #text = wx.TextCtrl(self, style=wx.TE_READONLY|wx.BORDER_NONE
+        self.staticname = wx.TextCtrl(self, style=wx.TE_READONLY ,value="EMPLOYEES", pos=(65, 65), size=(140,-1))
         lbl3 = wx.StaticText(self, label="WHERE ", pos=(15,110))
+        self.editname = wx.TextCtrl(self, value="", pos=(65, 105), size=(140,-1))
 
-class MyPanel1(wx.Panel): 
-   def __init__(self, parent): 
-      super(MyPanel1, self).__init__(parent) 
+class MyPanel1(wx.Panel):
+   def __init__(self, parent):
+      super(MyPanel1, self).__init__(parent)
       #text = wx.TextCtrl(self, style = wx.TE_MULTILINE, size = (250,150))
-      
+
       grid = SimpleGrid(self)
     #   grid.AutoSize()
     #   grid.EnableEditing(False)
     #   grid.DisableDragGridSize()
-		
-class MyPanel2(wx.Panel): 
-   def __init__(self, parent): 
-      super(MyPanel2, self).__init__(parent) 
+
+class MyPanel2(wx.Panel):
+   def __init__(self, parent):
+      super(MyPanel2, self).__init__(parent)
       grid = Diccionario_1(self)
       grid.AutoSize()
       grid.EnableEditing(False)
       grid.DisableDragGridSize()
 
-class MyPanel3(wx.Panel): 
-   def __init__(self, parent): 
-      super(MyPanel3, self).__init__(parent) 
+class MyPanel3(wx.Panel):
+   def __init__(self, parent):
+      super(MyPanel3, self).__init__(parent)
       lbl = wx.StaticText(self, label="Aca sale el resultado <3 ", pos=(15,30))
 
 if __name__ == '__main__':
