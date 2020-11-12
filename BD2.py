@@ -32,16 +32,11 @@ L_VAL = []
 
 def AbrirArchivo():
     """Esta función es para cargar la tabla desde un archivo"""
-
-<<<<<<< HEAD
     archivo = open('c:/Users/Lenovo/Desktop/Python/basededatos.txt','r')
-=======
-    archivo = open('/home/pavz/Documents/GitHub/BaseDeDAtos/basededatos.txt','r',)
->>>>>>> c992d84d744e0befa15d5c4eee83d338b5b43610
     formato = archivo.readline().rstrip()
     formato = formato.split(',')
     lin = []
-    tam = []
+    tam = [] 
     ind = 0
     for part in formato:
         if part.isnumeric():
@@ -76,11 +71,7 @@ def AbrirArchivo():
     archivo.close()
 #------------------------------------------------------------------------------------------
 def Diccionario():
-<<<<<<< HEAD
     archivo = open('c:/Users/Lenovo/Desktop/Python/basededatos.txt','r')
-=======
-    archivo = open('/home/pavz/Documents/GitHub/BaseDeDAtos/basededatos.txt','r',)
->>>>>>> c992d84d744e0befa15d5c4eee83d338b5b43610
     cadena = archivo.readline().rstrip()
     cadena= cadena.split(',')#aqui estan las palabras de los campos con las posiciones
     lin=[]
@@ -163,17 +154,15 @@ def imprime(sel, index):
     print()
 
 #------------------------------------------------------------------------------------------
-def select():
-    listas = input(">> ").split()
-    sel = listas[1].split(',')
+def select(valor):
+    sel = valor.split(',')
     return sel
 
 def toda(index):
     print ("{0:6s} | {1:20s} | {2:25s} | {3:25s} | {4:20s} | {5:8s} | {6:10s} | {7:8s} | {8:4s} | {9:6s} | {10:6s} |".format(EMPLOYEE_ID[index],FIRST_NAME[index],LAST_NAME[index],EMAIL[index],PHONE_NUMBER[index],HIRE_DATE[index],JOB_ID[index],SALARY[index],COMMISSION_PCT[index],MANAGER_ID[index],DEPARTMENT_ID[index]))
 
-def where(campos):#Forma de introducir: where department_id=9;
-    si = input(">> ").replace(";","").split()
-    si = si[1].split('=')
+def where(campos,valor2):#Forma de introducir: where department_id=9;
+    si = valor2.replace(";","").split('=')
     for index in range(0,len(EMPLOYEE_ID)):
         if si[0].upper() == "EMPLOYEE_ID":
             if EMPLOYEE_ID[index] == si[1]:
@@ -394,13 +383,27 @@ class Operaciones(wx.Panel):
         super(Operaciones, self).__init__(parent)
         wx.StaticBox(self, label='Instrucciones', pos=(0, 0), size=(1060, 145))
         lbl1 = wx.StaticText(self, label="SELECT ", pos=(15,30))#, pos=(0,0)
-        self.editname = wx.TextCtrl(self, value="", pos=(65, 25), size=(140,-1))
+        self.Text_Enter = wx.TextCtrl(self,2,style=wx.TE_PROCESS_ENTER, pos=(65, 25), size=(180,-1))
+#--------------------------------------------------------------
+        self.Text_Enter.SetForegroundColour(wx.BLUE)
+        self.Bind(wx.EVT_TEXT_ENTER, self.Txt_Ent, id=2)
+#-------------------------------------------------------------
         lbl2 = wx.StaticText(self, label="FROM ", pos=(15,70))
-        #self.dateLbl = wx.StaticBox(self,10, 'Date Range:', size=(40, 15))
-        #text = wx.TextCtrl(self, style=wx.TE_READONLY|wx.BORDER_NONE
-        self.staticname = wx.TextCtrl(self, style=wx.TE_READONLY ,value="EMPLOYEES", pos=(65, 65), size=(140,-1))
+        self.staticname = wx.TextCtrl(self, style=wx.TE_READONLY ,value="EMPLOYEES", pos=(65, 65), size=(180,-1))
         lbl3 = wx.StaticText(self, label="WHERE ", pos=(15,110))
-        self.editname = wx.TextCtrl(self, value="", pos=(65, 105), size=(140,-1))
+        self.Text_Enter_1= wx.TextCtrl(self,2,style=wx.TE_PROCESS_ENTER, pos=(65, 105), size=(180,-1))
+        self.Text_Enter_1.SetForegroundColour(wx.BLUE)
+        self.Bind(wx.EVT_TEXT_ENTER, self.Txt_Ent, id=2)
+
+    def Txt_Ent(self,event):
+        msg1=(str(self.Text_Enter.GetValue()))
+        msg2=(str(self.Text_Enter_1.GetValue()))
+        if msg1 == "" or msg2 == "":
+            wx.MessageBox("ERROR: Alguna Casilla Esta Vacia")
+        else:
+            print(msg1)
+            print(msg2)
+        
 
 class MyPanel1(wx.Panel):
    def __init__(self, parent):
