@@ -1,10 +1,13 @@
 """
+
 Practica de Bases de Datos. NRC:31505
+
     Reyes Murrieta Guadalupe     201733820
     Perez Armas Bardo Absalon    201708982
     Espinoza Bigurra Asael       201702598
     Medel Perez Pavel Jesus      201726903
     Tomas Chapital Cesar         201739585
+
 """
 import wx
 import wx.grid
@@ -21,22 +24,6 @@ COMMISSION_PCT = []
 MANAGER_ID = []
 DEPARTMENT_ID = []
 
-#Listas Para Mostrar el Resultado
-EMPLOYEE_ID_R = []
-FIRST_NAME_R = []
-LAST_NAME_R = []
-EMAIL_R = []
-PHONE_NUMBER_R = []
-HIRE_DATE_R = []
-JOB_ID_R = []
-SALARY_R = []
-COMMISSION_PCT_R = []
-MANAGER_ID_R = []
-DEPARTMENT_ID_R = []
-filas = 0 #Renglones
-columnas = 0
-sel = []
-
 ###Diccionario
 FIELD = []
 INI_P = []
@@ -48,7 +35,8 @@ L_VAL = []
 
 def AbrirArchivo():
     """Esta función es para cargar la tabla desde un archivo"""
-    archivo = open('/home/pavz/Desktop/basededatos.txt','r')#c:/Users/User/OneDrive/Escritorio/python-course/Progs/Arbol.txt
+
+    archivo = open('/home/pavz/Documents/GitHub/BaseDeDAtos/basededatos.txt','r',)
     formato = archivo.readline().rstrip()
     formato = formato.split(',')
     lin = []
@@ -87,7 +75,7 @@ def AbrirArchivo():
     archivo.close()
 #------------------------------------------------------------------------------------------
 def Diccionario():
-    archivo = open('/home/pavz/Desktop/basededatos.txt','r')
+    archivo = open('/home/pavz/Documents/GitHub/BaseDeDAtos/basededatos.txt','r',)
     cadena = archivo.readline().rstrip()
     cadena= cadena.split(',')#aqui estan las palabras de los campos con las posiciones
     lin=[]
@@ -124,67 +112,70 @@ def Diccionario():
 def imprime(sel, index):
     for el in sel:
         if el.upper() == "EMPLOYEE_ID":
-            EMPLOYEE_ID_R.append(EMPLOYEE_ID[index])
-            filas=len(EMPLOYEE_ID_R)
+            for i in range(0,6-len(EMPLOYEE_ID[index])):
+                print(f" ", end='')
+            print(f"{EMPLOYEE_ID[index]} | ", end='')
         elif el.upper() == "FIRST_NAME":
-            FIRST_NAME_R.append(FIRST_NAME[index])
-            filas=len(FIRST_NAME_R)
+            for i in range(0,20-len(FIRST_NAME[index])):
+                print(f" ", end='')
+            print(f"{FIRST_NAME[index]} | ", end='')
         elif el.upper() == "LAST_NAME":
-            LAST_NAME_R.append(LAST_NAME[index])
-            filas=len(LAST_NAME_R)
+            for i in range(0,25-len(LAST_NAME[index])):
+                print(f" ", end='')
+            print(f"{LAST_NAME[index]} | ", end='')
         elif el.upper() == "EMAIL":
-            EMAIL_R.append(EMAIL[index])
-            filas=len(EMAIL_R)
+            for i in range(0,25-len(EMAIL[index])):
+                print(f" ", end='')
+            print(f"{EMAIL[index]} | ", end='')
         elif el.upper() == "PHONE_NUMBER":
-            PHONE_NUMBER_R.append(PHONE_NUMBER[index])
-            filas=len(PHONE_NUMBER_R)
+            for i in range(0,20-len(PHONE_NUMBER[index])):
+                print(f" ", end='')
+            print(f"{PHONE_NUMBER[index]} | ", end='')
         elif el.upper() == "HIRE_DATE":
-            HIRE_DATE_R.append(HIRE_DATE[index])
-            filas=len(HIRE_DATE_R)
+            for i in range(0,8-len(HIRE_DATE[index])):
+                print(f" ", end='')
+            print(f"{HIRE_DATE[index]} | ", end='')
         elif el.upper() == "JOB_ID":
-            JOB_ID_R.append(JOB_ID[index])
-            filas=len(JOB_ID_R)
+            for i in range(0,10-len(JOB_ID[index])):
+                print(f" ", end='')
+            print(f"{JOB_ID[index]} | ", end='')
         elif el.upper() == "SALARY":
-            SALARY_R.append(SALARY[index])
-            filas=len(SALARY_R)
+            for i in range(0,8-len(SALARY[index])):
+                print(f" ", end='')
+            print(f"{SALARY[index]} | ", end='')
         elif el.upper() == "COMMISSION_PCT":
-            COMMISSION_PCT_R.append(COMMISSION_PCT[index])
-            filas=len(COMMISSION_PCT_R)
+            for i in range(0,4-len(COMMISSION_PCT[index])):
+                print(f" ", end='')
+            print(f"{COMMISSION_PCT[index]} | ", end='')
         elif el.upper() == "MANAGER_ID":
-            MANAGER_ID_R.append(MANAGER_ID[index])
-            filas=len(MANAGER_ID_R)
+            for i in range(0,6-len(MANAGER_ID[index])):
+                print(f" ", end='')
+            print(f"{MANAGER_ID[index]} | ", end='')
         elif el.upper() == "DEPARTMENT_ID":
-            DEPARTMENT_ID_R.append(DEPARTMENT_ID[index])
-            filas=len(DEPARTMENT_ID_R)
+            for i in range(0,6-len(DEPARTMENT_ID[index])):
+                print(f" ", end='')
+            print(f"{DEPARTMENT_ID[index]} | ", end='')
+    print()
+
 #------------------------------------------------------------------------------------------
-def select(valor):
-    sel = valor.split(',')
-    columnas = len(sel)
+def select():
+    listas = input(">> ").split()
+    sel = listas[1].split(',')
     return sel
 
 def toda(index):
-    #print ("{0:6s} | {1:20s} | {2:25s} | {3:25s} | {4:20s} | {5:8s} | {6:10s} | {7:8s} | {8:4s} | {9:6s} | {10:6s} |".format(EMPLOYEE_ID[index],FIRST_NAME[index],LAST_NAME[index],EMAIL[index],PHONE_NUMBER[index],HIRE_DATE[index],JOB_ID[index],SALARY[index],COMMISSION_PCT[index],MANAGER_ID[index],DEPARTMENT_ID[index]))
-    EMPLOYEE_ID_R.append(EMPLOYEE_ID[index])
-    FIRST_NAME_R.append(FIRST_NAME[index])
-    LAST_NAME_R.append(LAST_NAME[index])
-    EMAIL_R.append(EMAIL[index])
-    PHONE_NUMBER_R.append(PHONE_NUMBER[index])
-    HIRE_DATE_R.append(HIRE_DATE[index])
-    JOB_ID_R.append(JOB_ID[index])
-    SALARY_R.append(SALARY[index])
-    COMMISSION_PCT_R.append(COMMISSION_PCT[index])
-    MANAGER_ID_R.append(MANAGER_ID[index])
-    DEPARTMENT_ID_R.append(DEPARTMENT_ID[index])
+    print ("{0:6s} | {1:20s} | {2:25s} | {3:25s} | {4:20s} | {5:8s} | {6:10s} | {7:8s} | {8:4s} | {9:6s} | {10:6s} |".format(EMPLOYEE_ID[index],FIRST_NAME[index],LAST_NAME[index],EMAIL[index],PHONE_NUMBER[index],HIRE_DATE[index],JOB_ID[index],SALARY[index],COMMISSION_PCT[index],MANAGER_ID[index],DEPARTMENT_ID[index]))
 
-def where(campos,valor2):#Forma de introducir: where department_id=9; Campos recibe de Select, valor2 del cuadro
-    si = valor2.replace(";","").split('=')
+def where(campos):#Forma de introducir: where department_id=9;
+    si = input(">> ").replace(";","").split()
+    si = si[1].split('=')
     for index in range(0,len(EMPLOYEE_ID)):
         if si[0].upper() == "EMPLOYEE_ID":
             if EMPLOYEE_ID[index] == si[1]:
                 if campos[0]=="*":
-                    toda(index)#Crea el Grid de 11
+                    toda(index)
                 else:
-                    imprime(campos,index)#Crea el grid de n*m
+                    imprime(campos,index)
         elif si[0].upper() == "FIRST_NAME":
             if FIRST_NAME[index] == si[1]:
                 if campos[0]=="*":
@@ -247,7 +238,6 @@ def where(campos,valor2):#Forma de introducir: where department_id=9; Campos rec
                    imprime(campos,index)
 
 
-
 class Diccionario_1(wx.grid.Grid):
     def __init__(self, parent):
         wx.grid.Grid.__init__(self, parent, -1)
@@ -305,53 +295,11 @@ class Diccionario_1(wx.grid.Grid):
 
     def DisableDragGridSize(self):
         return super().DisableDragGridSize()
-#------------------------TABLA RESULTADOS--------------------------------
-class Tabla_Resultados(wx.grid.Grid):
-    def __init__(self, parent):
-        wx.grid.Grid.__init__(self, parent, -1)
-        self.CreateGrid(filas,columnas)
-
-        ##----------------------Columnas
-        for i in range(0,columnas):
-            self.SetColLabelValue(i, sel[i])
-            for j in range(0,filas):
-                if sel[i] == "EMPLOYEE_ID":
-                    self.SetCellValue(i, j, EMPLOYEE_ID_R[j])
-                elif sel[i] == "FIRST_NAME":
-                    self.SetCellValue(i, j, FIRST_NAME_R[j])
-                elif sel[i] == "LAST_NAME":
-                    self.SetCellValue(i, j, LAST_NAME_ID_R[j])
-                elif sel[i] == "EMAIL":
-                    self.SetCellValue(i, j, EMAIL_R[j])
-                elif sel[i] == "PHONE_NUMBER":
-                    self.SetCellValue(i, j, PHONE_NUMBER_R[j])
-                elif sel[i] == "HIRE_DATE":
-                    self.SetCellValue(i, j, HIRE_DATE_R[j])
-                elif sel[i] == "JOB_ID":
-                    self.SetCellValue(i, j, JOB_ID_R[j])
-                elif sel[i] == "SALARY":
-                    self.SetCellValue(i, j, SALARY_R[j])
-                elif sel[i] == "COMMISSION_PCT":
-                    self.SetCellValue(i, j, COMMISSION_PCT_R[j])
-                elif sel[i] == "MANAGER_ID":
-                    self.SetCellValue(i, j, MANAGER_ID_R[j])
-                elif sel[i] == "DEPARTMENT_ID":
-                    self.SetCellValue(i, j, DEPARTMENT_ID_R[j])
-        self.AutoSize()
-        self.EnableEditing(False)
-        self.DisableDragGridSize()
-
-        def EnableEditing(self, edit):
-            return super().EnableEditing(edit)
-
-        def AutoSize(self):
-            return super().AutoSize()
-
-        def DisableDragGridSize(self):
-            return super().DisableDragGridSize()
-
 
 #----------------------TABLA--------------------------------------------#
+#Pag 159: http://index-of.co.uk/Tutorials/wxPython%20in%20Action.pdf
+
+
 class SimpleGrid(wx.grid.Grid):
     def __init__(self, parent):
         wx.grid.Grid.__init__(self, parent, -1)
@@ -395,6 +343,7 @@ class SimpleGrid(wx.grid.Grid):
     def DisableDragGridSize(self):
         return super().DisableDragGridSize()
 
+
 class TestFrame(wx.Frame):
     def __init__(self, parent):
         wx.Frame.__init__(self, parent, -1, "PROYECTO BASE DE DATOS ^u^", size=(1090, 500))
@@ -402,12 +351,15 @@ class TestFrame(wx.Frame):
 
     def InitUI(self):
         Notebook = wx.Notebook(self)
+
         page = wx.SplitterWindow(Notebook)
         page2 = MyPanel2(Notebook)
-      # page3 = MyPanel3(Notebook)
+        page3 = MyPanel3(Notebook)
+
         Notebook.AddPage(page,"EMPLOYEES")
         Notebook.AddPage(page2,"DICCIONARIO")
-        #Notebook.AddPage(page3,"RESULTADO")
+        Notebook.AddPage(page3,"RESULTADO")
+
         panelTabla = SimpleGrid(page)
         panelOper = Operaciones(page)
         page.SplitHorizontally( panelOper,panelTabla)
@@ -415,76 +367,45 @@ class TestFrame(wx.Frame):
         sizer = wx.BoxSizer(wx.VERTICAL)
         sizer.Add(Notebook, 1, wx.EXPAND)
         self.SetSizer(sizer)
-        #-------------------------------------------------------------------------
-        status = self.CreateStatusBar()
-        menubar = wx.MenuBar()
-        opciones = wx.Menu()
-        salir = wx.Menu()
-        #-------------------------------------------------------------------------
-        opciones.Append(wx.ID_ABOUT, 'Opcion A', 'aqui se pone la opcion A')
-        wx.EVT_MENU(self,wx.ID_ABOUT, self.opcionA)
-        opciones.Append(wx.ID_ADD, 'Opcion B', 'aqui se pone la opcion B')
-        wx.EVT_MENU(self,wx.ID_ADD, self.opcionB)
-        salir.Append(wx.ID_EXIT, 'Quit', 'Quit application')
-        wx.EVT_MENU(self,wx.ID_EXIT, self.salir)
 
-        menubar.Append(opciones, 'OPCIONES')
-        menubar.Append(salir, 'SALIR')
+        menubar = wx.MenuBar()
+        fileMenu = wx.Menu()
+        fileItemA = fileMenu.Append(wx.ID_EXIT, 'Opcion A', 'Hola')
+        fileItemB = fileMenu.Append(wx.ID_EXIT, 'Opcion B', 'Bonjour')
+        fileItem = fileMenu.Append(wx.ID_EXIT, 'Quit', 'Quit application')
+        menubar.Append(fileMenu, '&OPCIONES')
         self.SetMenuBar(menubar)
 
-        #self.Bind(wx.EVT_MENU, self.OnQuit, fileSalir)
+        self.Bind(wx.EVT_MENU, self.OnQuit, fileItemA)
+        self.Bind(wx.EVT_MENU, self.OnQuit, fileItemB)
+        self.Bind(wx.EVT_MENU, self.OnQuit, fileItem)
         self.Centre()
 
-    def opcionA(self,event):#creditos
-                     opA=wx.MessageDialog(None, 'Aqui va la opcionA' ,  style=wx.OK)
-                     opA.ShowModal()
-
-    def opcionB(self,event):#creditos
-                     opB=wx.MessageDialog(None, 'Aqui va la opcionB',  style=wx.OK)
-                     opB.ShowModal()
-
-    def salir(self,event):#Salir
-                     salir=wx.MessageDialog(None, 'Chaup :,(','Salir', style=wx.OK)
-                     salir.ShowModal()
-                     self.Close(True)
-        #-------------------------------------------------------------------
-
-        #-------------------------------------------------------------------------
-
+    def OnQuit(self, e):
+        self.Close()
 
 class Operaciones(wx.Panel):
     def __init__(self, parent):
         super(Operaciones, self).__init__(parent)
         wx.StaticBox(self, label='Instrucciones', pos=(0, 0), size=(1060, 145))
         lbl1 = wx.StaticText(self, label="SELECT ", pos=(15,30))#, pos=(0,0)
-        self.Text_Enter = wx.TextCtrl(self,2,style=wx.TE_PROCESS_ENTER, pos=(65, 25), size=(180,-1))
-        self.Text_Enter.SetForegroundColour(wx.BLUE)
-        self.Bind(wx.EVT_TEXT_ENTER, self.Txt_Ent, id=2)
+        self.editname = wx.TextCtrl(self, value="", pos=(65, 25), size=(140,-1))
         lbl2 = wx.StaticText(self, label="FROM ", pos=(15,70))
-        self.staticname = wx.TextCtrl(self, style=wx.TE_READONLY ,value="EMPLOYEES", pos=(65, 65), size=(180,-1))
+        #self.dateLbl = wx.StaticBox(self,10, 'Date Range:', size=(40, 15))
+        #text = wx.TextCtrl(self, style=wx.TE_READONLY|wx.BORDER_NONE
+        self.staticname = wx.TextCtrl(self, style=wx.TE_READONLY ,value="EMPLOYEES", pos=(65, 65), size=(140,-1))
         lbl3 = wx.StaticText(self, label="WHERE ", pos=(15,110))
-        self.Text_Enter_1= wx.TextCtrl(self,2,style=wx.TE_PROCESS_ENTER, pos=(65, 105), size=(180,-1))
-        self.Text_Enter_1.SetForegroundColour(wx.BLUE)
-        self.Bind(wx.EVT_TEXT_ENTER, self.Txt_Ent, id=2)
-
-    def Txt_Ent(self,event):
-        msg1=(str(self.Text_Enter.GetValue()))
-        msg2=(str(self.Text_Enter_1.GetValue()))
-        if msg1 == "" or msg2 == "":
-            wx.MessageBox("ERROR: Alguna Casilla Esta Vacia")
-        else:
-            #print(msg1)
-            sel=select(msg1)
-            #print(msg2)
-            where(sel,msg2)
-
-
-
+        self.editname = wx.TextCtrl(self, value="", pos=(65, 105), size=(140,-1))
 
 class MyPanel1(wx.Panel):
    def __init__(self, parent):
       super(MyPanel1, self).__init__(parent)
+      #text = wx.TextCtrl(self, style = wx.TE_MULTILINE, size = (250,150))
+
       grid = SimpleGrid(self)
+    #   grid.AutoSize()
+    #   grid.EnableEditing(False)
+    #   grid.DisableDragGridSize()
 
 class MyPanel2(wx.Panel):
    def __init__(self, parent):
@@ -497,8 +418,7 @@ class MyPanel2(wx.Panel):
 class MyPanel3(wx.Panel):
    def __init__(self, parent):
       super(MyPanel3, self).__init__(parent)
-      #lbl = wx.StaticText(self, label="Aca sale el resultado <3 ", pos=(15,30))
-      grid = Tabla_Resultados(self)
+      lbl = wx.StaticText(self, label="Aca sale el resultado <3 ", pos=(15,30))
 
 if __name__ == '__main__':
     AbrirArchivo()
