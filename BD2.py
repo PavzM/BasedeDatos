@@ -305,31 +305,6 @@ class Tabla_Resultados(wx.grid.Grid):
             self.HazTabla(seltoda)
         else:
             self.HazTabla(sel)
-        # for i in range(0,columnas[0]):
-        #     self.SetColLabelValue(i, sel[i].upper())
-        #     for j in range(0,filas[0]):
-        #         if sel[i].upper() == "EMPLOYEE_ID":
-        #             self.SetCellValue(j, i, EMPLOYEE_ID_R[j])
-        #         elif sel[i].upper() == "FIRST_NAME":
-        #             self.SetCellValue(j, i, FIRST_NAME_R[j])
-        #         elif sel[i].upper() == "LAST_NAME":
-        #             self.SetCellValue(j, i, LAST_NAME_R[j])
-        #         elif sel[i].upper() == "EMAIL":
-        #             self.SetCellValue(j, i, EMAIL_R[j])
-        #         elif sel[i].upper() == "PHONE_NUMBER":
-        #             self.SetCellValue(j, i, PHONE_NUMBER_R[j])
-        #         elif sel[i].upper() == "HIRE_DATE":
-        #             self.SetCellValue(j, i, HIRE_DATE_R[j])
-        #         elif sel[i].upper() == "JOB_ID":
-        #             self.SetCellValue(j, i, JOB_ID_R[j])
-        #         elif sel[i].upper() == "SALARY":
-        #             self.SetCellValue(j, i, SALARY_R[j])
-        #         elif sel[i].upper() == "COMMISSION_PCT":
-        #             self.SetCellValue(j, i, COMMISSION_PCT_R[j])
-        #         elif sel[i].upper() == "MANAGER_ID":
-        #             self.SetCellValue(j, i, MANAGER_ID_R[j])
-        #         elif sel[i].upper() == "DEPARTMENT_ID":
-        #             self.SetCellValue(j, i, DEPARTMENT_ID_R[j])
         self.AutoSize()
         self.EnableEditing(False)
         self.DisableDragGridSize()
