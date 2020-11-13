@@ -49,7 +49,7 @@ L_VAL = []
 
 def AbrirArchivo():
     """Esta función es para cargar la tabla desde un archivo"""
-    archivo = open('C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt','r')
+    archivo = open('','r')#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt
     formato = archivo.readline().rstrip()
     formato = formato.split(',')
     lin = []
@@ -86,7 +86,7 @@ def AbrirArchivo():
     archivo.close()
 #------------------------------------------------------------------------------------------
 def Diccionario():
-    archivo = open('C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt','r')
+    archivo = open('','r')#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt
     cadena = archivo.readline().rstrip()
     cadena= cadena.split(',')#aqui estan las palabras de los campos con las posiciones
     lin=[]
@@ -521,6 +521,19 @@ class Operaciones(wx.Panel):
         self.Text_Enter_1= wx.TextCtrl(self,2,style=wx.TE_PROCESS_ENTER, pos=(65, 105), size=(180,-1))
         self.Text_Enter_1.SetForegroundColour(wx.BLUE)
         self.Bind(wx.EVT_TEXT_ENTER, self.Txt_Ent, id=2)
+    #----------------------------------------------------------------------------
+        self.Limpiar = wx.Button(self, label="LIMPIAR",pos=(270,50), size=(180,40))
+        self.Limpiar.Bind(wx.EVT_BUTTON,self.OnClicked)
+
+    def OnClicked(self,event):
+        sel = [0]
+        global filas
+        global columnas
+        filas = [0]
+        columnas = [0]
+        self.Text_Enter.Clear()
+        self.Text_Enter_1.Clear()
+    #------------------------------------------------------------------------------
 
     def Txt_Ent(self,event):
         msg1=(str(self.Text_Enter.GetValue()))
