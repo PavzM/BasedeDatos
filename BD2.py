@@ -33,7 +33,7 @@ SALARY_R = []
 COMMISSION_PCT_R = []
 MANAGER_ID_R = []
 DEPARTMENT_ID_R = []
-filas = [0]#Renglones
+filas = [0]
 columnas  = [0]
 sel = []
 
@@ -60,7 +60,6 @@ def AbrirArchivo():
             if ind > 0 and not (ind%2)==0:
                 tam.append(lin[ind] - (lin[ind-1]-1))
             ind = ind + 1
-    #print("{0:11s} | {1:20s} | {2:25s} | {3:25s} | {4:20s} | {5:8s} | {6:10s} | {7:8s} | {8:4s} | {9:6s} | {10:6s} |".format("EMPLOYEE_ID","FIRST_NAME","LAST_NAME","EMAIL","PHONE_NUMBER","HIRE_DATE","JOB_ID","SALARY","COMMISSION_PCT","MANAGER_ID","DEPARTMENT_ID"))
     laCompleta = []
     while True:
         linea = archivo.readline().rstrip()#Debemos leer por número de caracteres
@@ -81,7 +80,6 @@ def AbrirArchivo():
         COMMISSION_PCT.append(laCompleta[8].replace(' ', ''))
         MANAGER_ID.append(laCompleta[9].replace(' ', ''))
         DEPARTMENT_ID.append(laCompleta[10].replace(' ', ''))
-        #print ("{0:1s} | {1:1s} | {2:1s} | {3:1s} | {4:1s} | {5:9s} | {6:1s} | {7:1s} | {8:14s} | {9:10s} | {10:1s} |".format(laCompleta[0],laCompleta[1],laCompleta[2],laCompleta[3],laCompleta[4],laCompleta[5],laCompleta[6],laCompleta[7],laCompleta[8],laCompleta[9],laCompleta[10]))
         laCompleta.clear()
 
     archivo.close()
@@ -111,14 +109,7 @@ def Diccionario():
                 src=src+1
             else:
                 src=src+1
-    """for cas in FIELD:
-        print(FIELD[i],end="            ")
-        print(INI_P[i],end="             ")
-        print(TAM_FIELD[i],end="             ")
-        i=i+1
-        print("")"""
     #esta parte requiere de los datos pasados a tabla
-    # EN DISCUCION DE MOMENTO ESTATICO
     archivo.close()
 #------------------------------------------------------------------------------
 def imprime(SEL, index):
@@ -164,7 +155,6 @@ def select(valor):
     return sel
 
 def toda(index):
-    #print ("{0:6s} | {1:20s} | {2:25s} | {3:25s} | {4:20s} | {5:8s} | {6:10s} | {7:8s} | {8:4s} | {9:6s} | {10:6s} |".format(EMPLOYEE_ID[index],FIRST_NAME[index],LAST_NAME[index],EMAIL[index],PHONE_NUMBER[index],HIRE_DATE[index],JOB_ID[index],SALARY[index],COMMISSION_PCT[index],MANAGER_ID[index],DEPARTMENT_ID[index]))
     EMPLOYEE_ID_R.append(EMPLOYEE_ID[index])
     FIRST_NAME_R.append(FIRST_NAME[index])
     LAST_NAME_R.append(LAST_NAME[index])
@@ -281,14 +271,12 @@ class Diccionario_1(wx.grid.Grid):
         self.SetCellValue(8, 4,"0.0")
         self.SetCellValue(9, 4,"00001")
         self.SetCellValue(10, 4,"00001")
-
         self.SetCellValue(0, 5,"0000001")
         self.SetCellValue(5, 5,"01/01/87")
         self.SetCellValue(7, 5,"0000001")
         self.SetCellValue(8, 5,"0.0")
         self.SetCellValue(9, 5,"00001")
         self.SetCellValue(10, 5,"00001")
-
         self.SetCellValue(0, 6,"1000000")
         self.SetCellValue(5, 6,"10/11/2020")
         self.SetCellValue(7, 6,"1000000")
@@ -444,36 +432,28 @@ class TestFrameB(wx.Frame):
         sizer = wx.BoxSizer(wx.VERTICAL)
         sizer.Add(Notebook, 1, wx.EXPAND)
         self.SetSizer(sizer)
-        #-------------------------------------------------------------------------
         status = self.CreateStatusBar()
         menubar = wx.MenuBar()
         opciones = wx.Menu()
         salir = wx.Menu()
-        #-------------------------------------------------------------------------
         opciones.Append(wx.ID_ABOUT, 'Opcion A', 'aqui se pone la opcion A')
         wx.EVT_MENU(self,wx.ID_ABOUT, self.opcionA)
-
         salir.Append(wx.ID_EXIT, 'Quit', 'Quit application')
         wx.EVT_MENU(self,wx.ID_EXIT, self.salir)
-
         menubar.Append(opciones, 'OPCIONES')
         menubar.Append(salir, 'SALIR')
         self.SetMenuBar(menubar)
-
-        #self.Bind(wx.EVT_MENU, self.OnQuit, fileSalir)
         self.Centre()
 
     def opcionA(self,event):#creditos
         ventana=TestFrame(None)
         ventana.Show(True)
-        #ventana.ShowModal()
 
     def salir(self,event):#Salir
         salir=wx.MessageDialog(None, 'Chaup :,(','Salir', style=wx.OK)
         salir.ShowModal()
         self.Close(True)
         #-------------------------------------------------------------------
-
 
 class TestFrame(wx.Frame):
     def __init__(self, parent):
@@ -484,10 +464,8 @@ class TestFrame(wx.Frame):
         Notebook = wx.Notebook(self)
         page = wx.SplitterWindow(Notebook)
         page2 = MyPanel2(Notebook)
-      # page3 = MyPanel3(Notebook)
         Notebook.AddPage(page,"EMPLOYEES")
         Notebook.AddPage(page2,"DICCIONARIO")
-        #Notebook.AddPage(page3,"RESULTADO")
         panelTabla = SimpleGrid(page)
         panelOper = Operaciones(page)
         page.SplitHorizontally( panelOper,panelTabla)
@@ -495,34 +473,24 @@ class TestFrame(wx.Frame):
         sizer = wx.BoxSizer(wx.VERTICAL)
         sizer.Add(Notebook, 1, wx.EXPAND)
         self.SetSizer(sizer)
-        #-------------------------------------------------------------------------
         status = self.CreateStatusBar()
         menubar = wx.MenuBar()
         opciones = wx.Menu()
         salir = wx.Menu()
-        #-------------------------------------------------------------------------
         opciones.Append(wx.ID_ABOUT, 'Opcion A', 'aqui se pone la opcion A')
-        #wx.EVT_MENU(self,wx.ID_ABOUT, self.opcionA)
         self.Bind(wx.EVT_MENU,self.opcionA,id=wx.ID_ABOUT)
-
         opciones.Append(wx.ID_ADD, 'Opcion B', 'aqui se pone la opcion B')
-        #wx.EVT_MENU(self,wx.ID_ADD, self.opcionB)
         self.Bind(wx.EVT_MENU,self.opcionB,id=wx.ID_ADD)
         salir.Append(wx.ID_EXIT, 'Quit', 'Quit application')
-        #wx.EVT_MENU(self,wx.ID_EXIT, self.salir)
         self.Bind(wx.EVT_MENU,self.salir,id=wx.ID_EXIT)
-
         menubar.Append(opciones, 'OPCIONES')
         menubar.Append(salir, 'SALIR')
         self.SetMenuBar(menubar)
-
-        #self.Bind(wx.EVT_MENU, self.OnQuit, fileSalir)
         self.Centre()
 
     def opcionA(self,event):#creditos
         ventanaA=TestFrame(None)
         ventanaA.Show(True)
-        #ventana.ShowModal()
 
     def opcionB(self,event):#creditos
         ventanaB=TestFrameB(None)
@@ -533,9 +501,6 @@ class TestFrame(wx.Frame):
         salir.ShowModal()
         self.Close(True)
         #-------------------------------------------------------------------
-
-
-
 
 class Operaciones(wx.Panel):
     def __init__(self, parent):
@@ -564,9 +529,6 @@ class Operaciones(wx.Panel):
             Res.ShowModal()
             Res.Destroy()
 
-
-
-
 class MyPanel1(wx.Panel):
    def __init__(self, parent):
       super(MyPanel1, self).__init__(parent)
@@ -582,8 +544,6 @@ class MyPanel2(wx.Panel):
 
 class MyPanel3(wx.Dialog):
    def __init__(self, parent):
-      #super(MyPanel3, self).__init__(parent)
-      #lbl = wx.StaticText(self, label="Aca sale el resultado <3 ", pos=(15,30))
       wx.Dialog.__init__(self, parent,-1,title="Resultado",size=(1090, 500))
       grid = Tabla_Resultados(self)
       self.Centre()
@@ -595,13 +555,4 @@ if __name__ == '__main__':
     frame = TestFrame(None)
     frame.Show(True)
     app.MainLoop()
-
-
-
-#inst1 = input(">> ").split()
-#sel = inst1[1].split(',')
-#inst3 = input(">> ").split()
-#num = select()
-#where(num)
-
 #---------------------------------------------------------------------------------
