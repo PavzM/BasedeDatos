@@ -35,7 +35,7 @@ MANAGER_ID_R = []
 DEPARTMENT_ID_R = []
 filas = [0]
 columnas  = [0]
-sel = []
+sel = [0]
 seltoda = ["EMPLOYEE_ID", "FIRST_NAME", "LAST_NAME", "EMAIL", "PHONE_NUMBER", "HIRE_DATE", "JOB_ID", "SALARY", "COMMISSION_PCT", "MANAGER_ID", "DEPARTMENT_ID"]
 
 ###Diccionario
@@ -49,11 +49,8 @@ L_VAL = []
 
 def AbrirArchivo():
     """Esta función es para cargar la tabla desde un archivo"""
-<<<<<<< HEAD
     archivo = open('/home/pavz/Documents/GitHub/BaseDeDAtos/basededatos.txt','r')
-=======
-    archivo = open('c:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt','r')
->>>>>>> 5defe45eaca4f6ff3c905453c84b04bd8d3c4030
+
     formato = archivo.readline().rstrip()
     formato = formato.split(',')
     lin = []
@@ -90,11 +87,7 @@ def AbrirArchivo():
     archivo.close()
 #------------------------------------------------------------------------------------------
 def Diccionario():
-<<<<<<< HEAD
     archivo = open('/home/pavz/Documents/GitHub/BaseDeDAtos/basededatos.txt','r')
-=======
-    archivo = open('c:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt','r')
->>>>>>> 5defe45eaca4f6ff3c905453c84b04bd8d3c4030
     cadena = archivo.readline().rstrip()
     cadena= cadena.split(',')#aqui estan las palabras de los campos con las posiciones
     lin=[]
@@ -313,31 +306,6 @@ class Tabla_Resultados(wx.grid.Grid):
             self.HazTabla(seltoda)
         else:
             self.HazTabla(sel)
-        # for i in range(0,columnas[0]):
-        #     self.SetColLabelValue(i, sel[i].upper())
-        #     for j in range(0,filas[0]):
-        #         if sel[i].upper() == "EMPLOYEE_ID":
-        #             self.SetCellValue(j, i, EMPLOYEE_ID_R[j])
-        #         elif sel[i].upper() == "FIRST_NAME":
-        #             self.SetCellValue(j, i, FIRST_NAME_R[j])
-        #         elif sel[i].upper() == "LAST_NAME":
-        #             self.SetCellValue(j, i, LAST_NAME_R[j])
-        #         elif sel[i].upper() == "EMAIL":
-        #             self.SetCellValue(j, i, EMAIL_R[j])
-        #         elif sel[i].upper() == "PHONE_NUMBER":
-        #             self.SetCellValue(j, i, PHONE_NUMBER_R[j])
-        #         elif sel[i].upper() == "HIRE_DATE":
-        #             self.SetCellValue(j, i, HIRE_DATE_R[j])
-        #         elif sel[i].upper() == "JOB_ID":
-        #             self.SetCellValue(j, i, JOB_ID_R[j])
-        #         elif sel[i].upper() == "SALARY":
-        #             self.SetCellValue(j, i, SALARY_R[j])
-        #         elif sel[i].upper() == "COMMISSION_PCT":
-        #             self.SetCellValue(j, i, COMMISSION_PCT_R[j])
-        #         elif sel[i].upper() == "MANAGER_ID":
-        #             self.SetCellValue(j, i, MANAGER_ID_R[j])
-        #         elif sel[i].upper() == "DEPARTMENT_ID":
-        #             self.SetCellValue(j, i, DEPARTMENT_ID_R[j])
         self.AutoSize()
         self.EnableEditing(False)
         self.DisableDragGridSize()
@@ -519,8 +487,8 @@ class TestFrame(wx.Frame):
         menubar = wx.MenuBar()
         opciones = wx.Menu()
         salir = wx.Menu()
-        opciones.Append(wx.ID_ABOUT, 'Opcion A', 'aqui se pone la opcion A')
-        self.Bind(wx.EVT_MENU,self.opcionA,id=wx.ID_ABOUT)
+        #opciones.Append(wx.ID_ABOUT, 'Opcion A', 'aqui se pone la opcion A')
+        #self.Bind(wx.EVT_MENU,self.opcionA,id=wx.ID_ABOUT)
         opciones.Append(wx.ID_ADD, 'Opcion B', 'aqui se pone la opcion B')
         self.Bind(wx.EVT_MENU,self.opcionB,id=wx.ID_ADD)
         salir.Append(wx.ID_EXIT, 'Quit', 'Quit application')
@@ -529,10 +497,6 @@ class TestFrame(wx.Frame):
         menubar.Append(salir, 'SALIR')
         self.SetMenuBar(menubar)
         self.Centre()
-
-    def opcionA(self,event):#creditos
-        ventanaA=TestFrame(None)
-        ventanaA.Show(True)
 
     def opcionB(self,event):#creditos
         ventanaB=TestFrameB(None)
@@ -565,6 +529,7 @@ class Operaciones(wx.Panel):
         if msg1 == "" or msg2 == "":
             wx.MessageBox("ERROR: Alguna Casilla Esta Vacia")
         else:
+            sel.clear()
             SEL=select(msg1)
             where(SEL,msg2)
             Res=MyPanel3(self)
