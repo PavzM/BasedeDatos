@@ -299,29 +299,29 @@ class Tabla_Resultados(wx.grid.Grid):
         self.CreateGrid(filas[0],columnas[0])
         ##----------------------Columnas
         for i in range(0,columnas[0]):
-            self.SetColLabelValue(i, sel[i])
+            self.SetColLabelValue(i, sel[i].upper())
             for j in range(0,filas[0]):
-                if sel[i] == "EMPLOYEE_ID":
+                if sel[i].upper() == "EMPLOYEE_ID":
                     self.SetCellValue(j, i, EMPLOYEE_ID_R[j])
-                elif sel[i] == "FIRST_NAME":
+                elif sel[i].upper() == "FIRST_NAME":
                     self.SetCellValue(j, i, FIRST_NAME_R[j])
-                elif sel[i] == "LAST_NAME":
+                elif sel[i].upper() == "LAST_NAME":
                     self.SetCellValue(j, i, LAST_NAME_R[j])
-                elif sel[i] == "EMAIL":
+                elif sel[i].upper() == "EMAIL":
                     self.SetCellValue(j, i, EMAIL_R[j])
-                elif sel[i] == "PHONE_NUMBER":
+                elif sel[i].upper() == "PHONE_NUMBER":
                     self.SetCellValue(j, i, PHONE_NUMBER_R[j])
-                elif sel[i] == "HIRE_DATE":
+                elif sel[i].upper() == "HIRE_DATE":
                     self.SetCellValue(j, i, HIRE_DATE_R[j])
-                elif sel[i] == "JOB_ID":
+                elif sel[i].upper() == "JOB_ID":
                     self.SetCellValue(j, i, JOB_ID_R[j])
-                elif sel[i] == "SALARY":
+                elif sel[i].upper() == "SALARY":
                     self.SetCellValue(j, i, SALARY_R[j])
-                elif sel[i] == "COMMISSION_PCT":
+                elif sel[i].upper() == "COMMISSION_PCT":
                     self.SetCellValue(j, i, COMMISSION_PCT_R[j])
-                elif sel[i] == "MANAGER_ID":
+                elif sel[i].upper() == "MANAGER_ID":
                     self.SetCellValue(j, i, MANAGER_ID_R[j])
-                elif sel[i] == "DEPARTMENT_ID":
+                elif sel[i].upper() == "DEPARTMENT_ID":
                     self.SetCellValue(j, i, DEPARTMENT_ID_R[j])
         self.AutoSize()
         self.EnableEditing(False)
