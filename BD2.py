@@ -49,8 +49,12 @@ L_VAL = []
 
 def AbrirArchivo():
     """Esta función es para cargar la tabla desde un archivo"""
+<<<<<<< HEAD
     archivo = open('/home/pavz/Documents/GitHub/BaseDeDAtos/basededatos.txt','r')
 
+=======
+    archivo = open('c:/Users/Lenovo/Desktop/Python/basededatos.txt','r')
+>>>>>>> f6cfcf6d9a31a7a7745b79a03c45b298e2ce6c26
     formato = archivo.readline().rstrip()
     formato = formato.split(',')
     lin = []
@@ -87,7 +91,11 @@ def AbrirArchivo():
     archivo.close()
 #------------------------------------------------------------------------------------------
 def Diccionario():
+<<<<<<< HEAD
     archivo = open('/home/pavz/Documents/GitHub/BaseDeDAtos/basededatos.txt','r')
+=======
+    archivo = open('c:/Users/Lenovo/Desktop/Python/basededatos.txt','r')
+>>>>>>> f6cfcf6d9a31a7a7745b79a03c45b298e2ce6c26
     cadena = archivo.readline().rstrip()
     cadena= cadena.split(',')#aqui estan las palabras de los campos con las posiciones
     lin=[]
