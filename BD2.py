@@ -33,8 +33,8 @@ SALARY_R = []
 COMMISSION_PCT_R = []
 MANAGER_ID_R = []
 DEPARTMENT_ID_R = []
-filas = 0 #Renglones
-columnas = 0
+filas = [0]#Renglones
+columnas  = [0]
 sel = []
 
 ###Diccionario
@@ -48,7 +48,7 @@ L_VAL = []
 
 def AbrirArchivo():
     """Esta función es para cargar la tabla desde un archivo"""
-    archivo = open('c:/Users/Lenovo/Desktop/Python/basededatos.txt','r')#c:/Users/User/OneDrive/Escritorio/python-course/Progs/Arbol.txt
+    archivo = open('c:/Users/Lenovo/Desktop/Python/basededatos.txt','r')
     formato = archivo.readline().rstrip()
     formato = formato.split(',')
     lin = []
@@ -122,45 +122,45 @@ def Diccionario():
     archivo.close()
 #------------------------------------------------------------------------------
 def imprime(SEL, index):
-    #print(SEL,"ESTOY EN IMPRIME")
     for el in SEL:
         if el.upper() == "EMPLOYEE_ID":
             EMPLOYEE_ID_R.append(EMPLOYEE_ID[index])
-            filas=len(EMPLOYEE_ID_R)
+            filas[0]=len(EMPLOYEE_ID_R)
         elif el.upper() == "FIRST_NAME":
             FIRST_NAME_R.append(FIRST_NAME[index])
-            filas=len(FIRST_NAME_R)
+            filas[0]=len(FIRST_NAME_R)
         elif el.upper() == "LAST_NAME":
             LAST_NAME_R.append(LAST_NAME[index])
-            filas=len(LAST_NAME_R)
+            filas[0]=len(LAST_NAME_R)
         elif el.upper() == "EMAIL":
             EMAIL_R.append(EMAIL[index])
-            filas=len(EMAIL_R)
+            filas[0]=len(EMAIL_R)
         elif el.upper() == "PHONE_NUMBER":
             PHONE_NUMBER_R.append(PHONE_NUMBER[index])
-            filas=len(PHONE_NUMBER_R)
+            filas[0]=len(PHONE_NUMBER_R)
         elif el.upper() == "HIRE_DATE":
             HIRE_DATE_R.append(HIRE_DATE[index])
-            filas=len(HIRE_DATE_R)
+            filas[0]=len(HIRE_DATE_R)
         elif el.upper() == "JOB_ID":
             JOB_ID_R.append(JOB_ID[index])
-            filas=len(JOB_ID_R)
+            filas[0]=len(JOB_ID_R)
         elif el.upper() == "SALARY":
             SALARY_R.append(SALARY[index])
-            filas=len(SALARY_R)
+            filas[0]=len(SALARY_R)
         elif el.upper() == "COMMISSION_PCT":
             COMMISSION_PCT_R.append(COMMISSION_PCT[index])
-            filas=len(COMMISSION_PCT_R)
+            filas[0]=len(COMMISSION_PCT_R)
         elif el.upper() == "MANAGER_ID":
             MANAGER_ID_R.append(MANAGER_ID[index])
-            filas=len(MANAGER_ID_R)
+            filas[0]=len(MANAGER_ID_R)
         elif el.upper() == "DEPARTMENT_ID":
             DEPARTMENT_ID_R.append(DEPARTMENT_ID[index])
-            filas=len(DEPARTMENT_ID_R)
+            filas[0]=len(DEPARTMENT_ID_R)
 #------------------------------------------------------------------------------------------
 def select(valor):
+    global sel
     sel = valor.split(',')
-    columnas = len(sel)
+    columnas[0] = len(sel)
     return sel
 
 def toda(index):
@@ -308,34 +308,33 @@ class Diccionario_1(wx.grid.Grid):
 class Tabla_Resultados(wx.grid.Grid):
     def __init__(self, parent):
         wx.grid.Grid.__init__(self, parent, -1)
-        self.CreateGrid(filas,columnas)
-
+        self.CreateGrid(filas[0],columnas[0])
         ##----------------------Columnas
-        for i in range(0,columnas):
+        for i in range(0,columnas[0]):
             self.SetColLabelValue(i, sel[i])
-            for j in range(0,filas):
+            for j in range(0,filas[0]):
                 if sel[i] == "EMPLOYEE_ID":
-                    self.SetCellValue(i, j, EMPLOYEE_ID_R[j])
+                    self.SetCellValue(j, i, EMPLOYEE_ID_R[j])
                 elif sel[i] == "FIRST_NAME":
-                    self.SetCellValue(i, j, FIRST_NAME_R[j])
+                    self.SetCellValue(j, i, FIRST_NAME_R[j])
                 elif sel[i] == "LAST_NAME":
-                    self.SetCellValue(i, j, LAST_NAME_ID_R[j])
+                    self.SetCellValue(j, i, LAST_NAME_R[j])
                 elif sel[i] == "EMAIL":
-                    self.SetCellValue(i, j, EMAIL_R[j])
+                    self.SetCellValue(j, i, EMAIL_R[j])
                 elif sel[i] == "PHONE_NUMBER":
-                    self.SetCellValue(i, j, PHONE_NUMBER_R[j])
+                    self.SetCellValue(j, i, PHONE_NUMBER_R[j])
                 elif sel[i] == "HIRE_DATE":
-                    self.SetCellValue(i, j, HIRE_DATE_R[j])
+                    self.SetCellValue(j, i, HIRE_DATE_R[j])
                 elif sel[i] == "JOB_ID":
-                    self.SetCellValue(i, j, JOB_ID_R[j])
+                    self.SetCellValue(j, i, JOB_ID_R[j])
                 elif sel[i] == "SALARY":
-                    self.SetCellValue(i, j, SALARY_R[j])
+                    self.SetCellValue(j, i, SALARY_R[j])
                 elif sel[i] == "COMMISSION_PCT":
-                    self.SetCellValue(i, j, COMMISSION_PCT_R[j])
+                    self.SetCellValue(j, i, COMMISSION_PCT_R[j])
                 elif sel[i] == "MANAGER_ID":
-                    self.SetCellValue(i, j, MANAGER_ID_R[j])
+                    self.SetCellValue(j, i, MANAGER_ID_R[j])
                 elif sel[i] == "DEPARTMENT_ID":
-                    self.SetCellValue(i, j, DEPARTMENT_ID_R[j])
+                    self.SetCellValue(j, i, DEPARTMENT_ID_R[j])
         self.AutoSize()
         self.EnableEditing(False)
         self.DisableDragGridSize()
@@ -503,11 +502,15 @@ class TestFrame(wx.Frame):
         salir = wx.Menu()
         #-------------------------------------------------------------------------
         opciones.Append(wx.ID_ABOUT, 'Opcion A', 'aqui se pone la opcion A')
-        wx.EVT_MENU(self,wx.ID_ABOUT, self.opcionA)
+        #wx.EVT_MENU(self,wx.ID_ABOUT, self.opcionA)
+        self.Bind(wx.EVT_MENU,self.opcionA,id=wx.ID_ABOUT)
+
         opciones.Append(wx.ID_ADD, 'Opcion B', 'aqui se pone la opcion B')
-        wx.EVT_MENU(self,wx.ID_ADD, self.opcionB)
+        #wx.EVT_MENU(self,wx.ID_ADD, self.opcionB)
+        self.Bind(wx.EVT_MENU,self.opcionB,id=wx.ID_ADD)
         salir.Append(wx.ID_EXIT, 'Quit', 'Quit application')
-        wx.EVT_MENU(self,wx.ID_EXIT, self.salir)
+        #wx.EVT_MENU(self,wx.ID_EXIT, self.salir)
+        self.Bind(wx.EVT_MENU,self.salir,id=wx.ID_EXIT)
 
         menubar.Append(opciones, 'OPCIONES')
         menubar.Append(salir, 'SALIR')
@@ -555,10 +558,11 @@ class Operaciones(wx.Panel):
         if msg1 == "" or msg2 == "":
             wx.MessageBox("ERROR: Alguna Casilla Esta Vacia")
         else:
-            #print(msg1)
-            sel=select(msg1)
-            #print(msg2)
-            where(sel,msg2)
+            SEL=select(msg1)
+            where(SEL,msg2)
+            Res=MyPanel3(self)
+            Res.ShowModal()
+            Res.Destroy()
 
 
 
@@ -578,9 +582,11 @@ class MyPanel2(wx.Panel):
 
 class MyPanel3(wx.Dialog):
    def __init__(self, parent):
-      super(MyPanel3, self).__init__(parent)
+      #super(MyPanel3, self).__init__(parent)
       #lbl = wx.StaticText(self, label="Aca sale el resultado <3 ", pos=(15,30))
+      wx.Dialog.__init__(self, parent,-1,title="Resultado",size=(1090, 500))
       grid = Tabla_Resultados(self)
+      self.Centre()
 
 if __name__ == '__main__':
     AbrirArchivo()
