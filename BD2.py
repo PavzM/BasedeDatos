@@ -48,11 +48,7 @@ L_VAL = []
 
 def AbrirArchivo():
     """Esta función es para cargar la tabla desde un archivo"""
-<<<<<<< HEAD
     archivo = open('/home/pavz/Desktop/basededatos.txt','r')#c:/Users/User/OneDrive/Escritorio/python-course/Progs/Arbol.txt
-=======
-    archivo = open('c:/Users/Lenovo/Desktop/Python/basededatos.txt','r')
->>>>>>> 16566420aea4508cd9dd20e9ec175eb79e68edee
     formato = archivo.readline().rstrip()
     formato = formato.split(',')
     lin = []
@@ -91,11 +87,7 @@ def AbrirArchivo():
     archivo.close()
 #------------------------------------------------------------------------------------------
 def Diccionario():
-<<<<<<< HEAD
     archivo = open('/home/pavz/Desktop/basededatos.txt','r')
-=======
-    archivo = open('c:/Users/Lenovo/Desktop/Python/basededatos.txt','r')
->>>>>>> 16566420aea4508cd9dd20e9ec175eb79e68edee
     cadena = archivo.readline().rstrip()
     cadena= cadena.split(',')#aqui estan las palabras de los campos con las posiciones
     lin=[]
@@ -167,7 +159,6 @@ def imprime(sel, index):
 #------------------------------------------------------------------------------------------
 def select(valor):
     sel = valor.split(',')
-<<<<<<< HEAD
     columnas = len(sel)
     return sel
 
@@ -186,14 +177,6 @@ def toda(index):
     DEPARTMENT_ID_R.append(DEPARTMENT_ID[index])
 
 def where(campos,valor2):#Forma de introducir: where department_id=9; Campos recibe de Select, valor2 del cuadro
-=======
-    return sel
-
-def toda(index):
-    print ("{0:6s} | {1:20s} | {2:25s} | {3:25s} | {4:20s} | {5:8s} | {6:10s} | {7:8s} | {8:4s} | {9:6s} | {10:6s} |".format(EMPLOYEE_ID[index],FIRST_NAME[index],LAST_NAME[index],EMAIL[index],PHONE_NUMBER[index],HIRE_DATE[index],JOB_ID[index],SALARY[index],COMMISSION_PCT[index],MANAGER_ID[index],DEPARTMENT_ID[index]))
-
-def where(campos,valor2):#Forma de introducir: where department_id=9;
->>>>>>> 16566420aea4508cd9dd20e9ec175eb79e68edee
     si = valor2.replace(";","").split('=')
     for index in range(0,len(EMPLOYEE_ID)):
         if si[0].upper() == "EMPLOYEE_ID":
@@ -412,6 +395,88 @@ class SimpleGrid(wx.grid.Grid):
     def DisableDragGridSize(self):
         return super().DisableDragGridSize()
 
+
+class SimpleGridEmpty(wx.grid.Grid):
+    def __init__(self, parent):
+        wx.grid.Grid.__init__(self, parent, -1)
+        self.CreateGrid(10, 11)
+    #------------------------------------------------------Columnas
+        self.SetColLabelValue(0, "EMPLOYEE_ID")
+        self.SetColLabelValue(1, "FIRST_NAME")
+        self.SetColLabelValue(2, "LAST_NAME")
+        self.SetColLabelValue(3, "EMAIL")
+        self.SetColLabelValue(4, "PHONE_NUMBER")
+        self.SetColLabelValue(5, "HIRE_DATE")
+        self.SetColLabelValue(6, "JOB_ID")
+        self.SetColLabelValue(7, "SALARY")
+        self.SetColLabelValue(8, "COMMISSION_PCT")
+        self.SetColLabelValue(9, "MANAGER_ID")
+        self.SetColLabelValue(10, "DEPARTMENT_ID")
+        self.AutoSize()
+        self.EnableEditing(False)
+        self.DisableDragGridSize()
+
+    def EnableEditing(self, edit):
+        return super().EnableEditing(edit)
+
+    def AutoSize(self):
+        return super().AutoSize()
+
+    def DisableDragGridSize(self):
+        return super().DisableDragGridSize()
+
+
+class TestFrameB(wx.Frame):
+    def __init__(self, parent):
+        wx.Frame.__init__(self, parent, -1, "PROYECTO BASE DE DATOS OPCION B ^u^", size=(1090, 500))
+        self.InitUI()
+
+    def InitUI(self):
+        Notebook = wx.Notebook(self)
+        page = wx.SplitterWindow(Notebook)
+        page2 = MyPanel2(Notebook)
+        page3 = MyPanel3(Notebook)
+        Notebook.AddPage(page,"EMPLOYEES")
+        Notebook.AddPage(page2,"DICCIONARIO")
+        Notebook.AddPage(page3,"RESULTADO")
+        panelTabla = SimpleGridEmpty(page)
+        panelOper = Operaciones(page)
+        page.SplitHorizontally( panelOper, panelTabla)
+        page.SetSashGravity(0.35)
+        sizer = wx.BoxSizer(wx.VERTICAL)
+        sizer.Add(Notebook, 1, wx.EXPAND)
+        self.SetSizer(sizer)
+        #-------------------------------------------------------------------------
+        status = self.CreateStatusBar()
+        menubar = wx.MenuBar()
+        opciones = wx.Menu()
+        salir = wx.Menu()
+        #-------------------------------------------------------------------------
+        opciones.Append(wx.ID_ABOUT, 'Opcion A', 'aqui se pone la opcion A')
+        wx.EVT_MENU(self,wx.ID_ABOUT, self.opcionA)
+
+        salir.Append(wx.ID_EXIT, 'Quit', 'Quit application')
+        wx.EVT_MENU(self,wx.ID_EXIT, self.salir)
+
+        menubar.Append(opciones, 'OPCIONES')
+        menubar.Append(salir, 'SALIR')
+        self.SetMenuBar(menubar)
+
+        #self.Bind(wx.EVT_MENU, self.OnQuit, fileSalir)
+        self.Centre()
+
+    def opcionA(self,event):#creditos
+        ventana=TestFrame(None)
+        ventana.Show(True)
+        #ventana.ShowModal()
+
+    def salir(self,event):#Salir
+        salir=wx.MessageDialog(None, 'Chaup :,(','Salir', style=wx.OK)
+        salir.ShowModal()
+        self.Close(True)
+        #-------------------------------------------------------------------
+
+
 class TestFrame(wx.Frame):
     def __init__(self, parent):
         wx.Frame.__init__(self, parent, -1, "PROYECTO BASE DE DATOS ^u^", size=(1090, 500))
@@ -453,20 +518,21 @@ class TestFrame(wx.Frame):
         self.Centre()
 
     def opcionA(self,event):#creditos
-                     opA=wx.MessageDialog(None, 'Aqui va la opcionA' ,  style=wx.OK)
-                     opA.ShowModal()
+        ventanaA=TestFrame(None)
+        ventanaA.Show(True)
+        #ventana.ShowModal()
 
     def opcionB(self,event):#creditos
-                     opB=wx.MessageDialog(None, 'Aqui va la opcionB',  style=wx.OK)
-                     opB.ShowModal()
+        ventanaB=TestFrameB(None)
+        ventanaB.Show(True)
 
     def salir(self,event):#Salir
-                     salir=wx.MessageDialog(None, 'Chaup :,(','Salir', style=wx.OK)
-                     salir.ShowModal()
-                     self.Close(True)
+        salir=wx.MessageDialog(None, 'Chaup :,(','Salir', style=wx.OK)
+        salir.ShowModal()
+        self.Close(True)
         #-------------------------------------------------------------------
 
-        #-------------------------------------------------------------------------
+
 
 
 class Operaciones(wx.Panel):
@@ -475,15 +541,8 @@ class Operaciones(wx.Panel):
         wx.StaticBox(self, label='Instrucciones', pos=(0, 0), size=(1060, 145))
         lbl1 = wx.StaticText(self, label="SELECT ", pos=(15,30))#, pos=(0,0)
         self.Text_Enter = wx.TextCtrl(self,2,style=wx.TE_PROCESS_ENTER, pos=(65, 25), size=(180,-1))
-<<<<<<< HEAD
         self.Text_Enter.SetForegroundColour(wx.BLUE)
         self.Bind(wx.EVT_TEXT_ENTER, self.Txt_Ent, id=2)
-=======
-#--------------------------------------------------------------
-        self.Text_Enter.SetForegroundColour(wx.BLUE)
-        self.Bind(wx.EVT_TEXT_ENTER, self.Txt_Ent, id=2)
-#-------------------------------------------------------------
->>>>>>> 16566420aea4508cd9dd20e9ec175eb79e68edee
         lbl2 = wx.StaticText(self, label="FROM ", pos=(15,70))
         self.staticname = wx.TextCtrl(self, style=wx.TE_READONLY ,value="EMPLOYEES", pos=(65, 65), size=(180,-1))
         lbl3 = wx.StaticText(self, label="WHERE ", pos=(15,110))
@@ -497,7 +556,6 @@ class Operaciones(wx.Panel):
         if msg1 == "" or msg2 == "":
             wx.MessageBox("ERROR: Alguna Casilla Esta Vacia")
         else:
-<<<<<<< HEAD
             #print(msg1)
             sel=select(msg1)
             #print(msg2)
@@ -505,11 +563,6 @@ class Operaciones(wx.Panel):
 
 
 
-=======
-            print(msg1)
-            print(msg2)
-
->>>>>>> 16566420aea4508cd9dd20e9ec175eb79e68edee
 
 class MyPanel1(wx.Panel):
    def __init__(self, parent):
