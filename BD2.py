@@ -33,9 +33,15 @@ SALARY_R = []
 COMMISSION_PCT_R = []
 MANAGER_ID_R = []
 DEPARTMENT_ID_R = []
+<<<<<<< HEAD
 filas = [0]#Renglones
 columnas  = [0]
 SEL = []
+=======
+filas = 0 #Renglones
+columnas = 0
+sel = []
+>>>>>>> 65def85bfad3a3f4671199f3dfc69c46534c6839
 
 ###Diccionario
 FIELD = []
@@ -48,7 +54,11 @@ L_VAL = []
 
 def AbrirArchivo():
     """Esta función es para cargar la tabla desde un archivo"""
+<<<<<<< HEAD
     archivo = open('c:/Users/Lenovo/Desktop/Python/basededatos.txt','r')#c:/Users/User/OneDrive/Escritorio/python-course/Progs/Arbol.txt
+=======
+    archivo = open('/home/pavz/Desktop/basededatos.txt','r')#c:/Users/User/OneDrive/Escritorio/python-course/Progs/Arbol.txt
+>>>>>>> 65def85bfad3a3f4671199f3dfc69c46534c6839
     formato = archivo.readline().rstrip()
     formato = formato.split(',')
     lin = []
@@ -87,7 +97,7 @@ def AbrirArchivo():
     archivo.close()
 #------------------------------------------------------------------------------------------
 def Diccionario():
-    archivo = open('c:/Users/Lenovo/Desktop/Python/basededatos.txt','r')
+    archivo = open('/home/pavz/Desktop/basededatos.txt','r')
     cadena = archivo.readline().rstrip()
     cadena= cadena.split(',')#aqui estan las palabras de los campos con las posiciones
     lin=[]
@@ -126,6 +136,7 @@ def imprime(SEL, index):
     for el in SEL:
         if el.upper() == "EMPLOYEE_ID":
             EMPLOYEE_ID_R.append(EMPLOYEE_ID[index])
+<<<<<<< HEAD
             filas[0]=len(EMPLOYEE_ID_R)
         elif el.upper() == "FIRST_NAME":
             FIRST_NAME_R.append(FIRST_NAME[index])
@@ -163,6 +174,44 @@ def select(valor):
     columnas[0] = len(SEL)
     print(SEL)
     return SEL
+=======
+            filas=len(EMPLOYEE_ID_R)
+        elif el.upper() == "FIRST_NAME":
+            FIRST_NAME_R.append(FIRST_NAME[index])
+            filas=len(FIRST_NAME_R)
+        elif el.upper() == "LAST_NAME":
+            LAST_NAME_R.append(LAST_NAME[index])
+            filas=len(LAST_NAME_R)
+        elif el.upper() == "EMAIL":
+            EMAIL_R.append(EMAIL[index])
+            filas=len(EMAIL_R)
+        elif el.upper() == "PHONE_NUMBER":
+            PHONE_NUMBER_R.append(PHONE_NUMBER[index])
+            filas=len(PHONE_NUMBER_R)
+        elif el.upper() == "HIRE_DATE":
+            HIRE_DATE_R.append(HIRE_DATE[index])
+            filas=len(HIRE_DATE_R)
+        elif el.upper() == "JOB_ID":
+            JOB_ID_R.append(JOB_ID[index])
+            filas=len(JOB_ID_R)
+        elif el.upper() == "SALARY":
+            SALARY_R.append(SALARY[index])
+            filas=len(SALARY_R)
+        elif el.upper() == "COMMISSION_PCT":
+            COMMISSION_PCT_R.append(COMMISSION_PCT[index])
+            filas=len(COMMISSION_PCT_R)
+        elif el.upper() == "MANAGER_ID":
+            MANAGER_ID_R.append(MANAGER_ID[index])
+            filas=len(MANAGER_ID_R)
+        elif el.upper() == "DEPARTMENT_ID":
+            DEPARTMENT_ID_R.append(DEPARTMENT_ID[index])
+            filas=len(DEPARTMENT_ID_R)
+#------------------------------------------------------------------------------------------
+def select(valor):
+    sel = valor.split(',')
+    columnas = len(sel)
+    return sel
+>>>>>>> 65def85bfad3a3f4671199f3dfc69c46534c6839
 
 def toda(index):
     #print ("{0:6s} | {1:20s} | {2:25s} | {3:25s} | {4:20s} | {5:8s} | {6:10s} | {7:8s} | {8:4s} | {9:6s} | {10:6s} |".format(EMPLOYEE_ID[index],FIRST_NAME[index],LAST_NAME[index],EMAIL[index],PHONE_NUMBER[index],HIRE_DATE[index],JOB_ID[index],SALARY[index],COMMISSION_PCT[index],MANAGER_ID[index],DEPARTMENT_ID[index]))
@@ -248,6 +297,11 @@ def where(campos,valor2):#Forma de introducir: where department_id=9; Campos rec
                 else:
                    imprime(campos,index)
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 65def85bfad3a3f4671199f3dfc69c46534c6839
 class Diccionario_1(wx.grid.Grid):
     def __init__(self, parent):
         wx.grid.Grid.__init__(self, parent, -1)
@@ -309,6 +363,7 @@ class Diccionario_1(wx.grid.Grid):
 class Tabla_Resultados(wx.grid.Grid):
     def __init__(self, parent):
         wx.grid.Grid.__init__(self, parent, -1)
+<<<<<<< HEAD
         self.CreateGrid(filas[0],columnas[0])
         ##----------------------Columnas
         for i in range(0,columnas[0]):
@@ -335,6 +390,35 @@ class Tabla_Resultados(wx.grid.Grid):
                 elif SEL[i] == "MANAGER_ID":
                     self.SetCellValue(i, j, MANAGER_ID_R[j])
                 elif SEL[i] == "DEPARTMENT_ID":
+=======
+        self.CreateGrid(filas,columnas)
+
+        ##----------------------Columnas
+        for i in range(0,columnas):
+            self.SetColLabelValue(i, sel[i])
+            for j in range(0,filas):
+                if sel[i] == "EMPLOYEE_ID":
+                    self.SetCellValue(i, j, EMPLOYEE_ID_R[j])
+                elif sel[i] == "FIRST_NAME":
+                    self.SetCellValue(i, j, FIRST_NAME_R[j])
+                elif sel[i] == "LAST_NAME":
+                    self.SetCellValue(i, j, LAST_NAME_ID_R[j])
+                elif sel[i] == "EMAIL":
+                    self.SetCellValue(i, j, EMAIL_R[j])
+                elif sel[i] == "PHONE_NUMBER":
+                    self.SetCellValue(i, j, PHONE_NUMBER_R[j])
+                elif sel[i] == "HIRE_DATE":
+                    self.SetCellValue(i, j, HIRE_DATE_R[j])
+                elif sel[i] == "JOB_ID":
+                    self.SetCellValue(i, j, JOB_ID_R[j])
+                elif sel[i] == "SALARY":
+                    self.SetCellValue(i, j, SALARY_R[j])
+                elif sel[i] == "COMMISSION_PCT":
+                    self.SetCellValue(i, j, COMMISSION_PCT_R[j])
+                elif sel[i] == "MANAGER_ID":
+                    self.SetCellValue(i, j, MANAGER_ID_R[j])
+                elif sel[i] == "DEPARTMENT_ID":
+>>>>>>> 65def85bfad3a3f4671199f3dfc69c46534c6839
                     self.SetCellValue(i, j, DEPARTMENT_ID_R[j])
         self.AutoSize()
         self.EnableEditing(False)
@@ -394,6 +478,97 @@ class SimpleGrid(wx.grid.Grid):
     def DisableDragGridSize(self):
         return super().DisableDragGridSize()
 
+<<<<<<< HEAD
+class TestFrame(wx.Frame):
+=======
+
+class SimpleGridEmpty(wx.grid.Grid):
+>>>>>>> 65def85bfad3a3f4671199f3dfc69c46534c6839
+    def __init__(self, parent):
+        wx.grid.Grid.__init__(self, parent, -1)
+        self.CreateGrid(10, 11)
+    #------------------------------------------------------Columnas
+        self.SetColLabelValue(0, "EMPLOYEE_ID")
+        self.SetColLabelValue(1, "FIRST_NAME")
+        self.SetColLabelValue(2, "LAST_NAME")
+        self.SetColLabelValue(3, "EMAIL")
+        self.SetColLabelValue(4, "PHONE_NUMBER")
+        self.SetColLabelValue(5, "HIRE_DATE")
+        self.SetColLabelValue(6, "JOB_ID")
+        self.SetColLabelValue(7, "SALARY")
+        self.SetColLabelValue(8, "COMMISSION_PCT")
+        self.SetColLabelValue(9, "MANAGER_ID")
+        self.SetColLabelValue(10, "DEPARTMENT_ID")
+        self.AutoSize()
+        self.EnableEditing(False)
+        self.DisableDragGridSize()
+
+    def EnableEditing(self, edit):
+        return super().EnableEditing(edit)
+
+    def AutoSize(self):
+        return super().AutoSize()
+
+    def DisableDragGridSize(self):
+        return super().DisableDragGridSize()
+
+
+class TestFrameB(wx.Frame):
+    def __init__(self, parent):
+        wx.Frame.__init__(self, parent, -1, "PROYECTO BASE DE DATOS OPCION B ^u^", size=(1090, 500))
+        self.InitUI()
+
+    def InitUI(self):
+        Notebook = wx.Notebook(self)
+        page = wx.SplitterWindow(Notebook)
+        page2 = MyPanel2(Notebook)
+<<<<<<< HEAD
+      # page3 = MyPanel3(Notebook)
+        Notebook.AddPage(page,"EMPLOYEES")
+        Notebook.AddPage(page2,"DICCIONARIO")
+=======
+        page3 = MyPanel3(Notebook)
+        Notebook.AddPage(page,"EMPLOYEES")
+        Notebook.AddPage(page2,"DICCIONARIO")
+        Notebook.AddPage(page3,"RESULTADO")
+        panelTabla = SimpleGridEmpty(page)
+        panelOper = Operaciones(page)
+        page.SplitHorizontally( panelOper, panelTabla)
+        page.SetSashGravity(0.35)
+        sizer = wx.BoxSizer(wx.VERTICAL)
+        sizer.Add(Notebook, 1, wx.EXPAND)
+        self.SetSizer(sizer)
+        #-------------------------------------------------------------------------
+        status = self.CreateStatusBar()
+        menubar = wx.MenuBar()
+        opciones = wx.Menu()
+        salir = wx.Menu()
+        #-------------------------------------------------------------------------
+        opciones.Append(wx.ID_ABOUT, 'Opcion A', 'aqui se pone la opcion A')
+        wx.EVT_MENU(self,wx.ID_ABOUT, self.opcionA)
+
+        salir.Append(wx.ID_EXIT, 'Quit', 'Quit application')
+        wx.EVT_MENU(self,wx.ID_EXIT, self.salir)
+
+        menubar.Append(opciones, 'OPCIONES')
+        menubar.Append(salir, 'SALIR')
+        self.SetMenuBar(menubar)
+
+        #self.Bind(wx.EVT_MENU, self.OnQuit, fileSalir)
+        self.Centre()
+
+    def opcionA(self,event):#creditos
+        ventana=TestFrame(None)
+        ventana.Show(True)
+        #ventana.ShowModal()
+
+    def salir(self,event):#Salir
+        salir=wx.MessageDialog(None, 'Chaup :,(','Salir', style=wx.OK)
+        salir.ShowModal()
+        self.Close(True)
+        #-------------------------------------------------------------------
+
+
 class TestFrame(wx.Frame):
     def __init__(self, parent):
         wx.Frame.__init__(self, parent, -1, "PROYECTO BASE DE DATOS ^u^", size=(1090, 500))
@@ -406,6 +581,7 @@ class TestFrame(wx.Frame):
       # page3 = MyPanel3(Notebook)
         Notebook.AddPage(page,"EMPLOYEES")
         Notebook.AddPage(page2,"DICCIONARIO")
+>>>>>>> 65def85bfad3a3f4671199f3dfc69c46534c6839
         #Notebook.AddPage(page3,"RESULTADO")
         panelTabla = SimpleGrid(page)
         panelOper = Operaciones(page)
@@ -414,20 +590,52 @@ class TestFrame(wx.Frame):
         sizer = wx.BoxSizer(wx.VERTICAL)
         sizer.Add(Notebook, 1, wx.EXPAND)
         self.SetSizer(sizer)
+<<<<<<< HEAD
+=======
+        #-------------------------------------------------------------------------
+        status = self.CreateStatusBar()
+>>>>>>> 65def85bfad3a3f4671199f3dfc69c46534c6839
         menubar = wx.MenuBar()
-        fileMenu = wx.Menu()
-        fileItemA = fileMenu.Append(wx.ID_EXIT, 'Opcion A', 'Quit application')
-        fileItemB = fileMenu.Append(wx.ID_EXIT, 'Opcion B', 'Quit application')
-        fileItem = fileMenu.Append(wx.ID_EXIT, 'Quit', 'Quit application')
-        menubar.Append(fileMenu, '&OPCIONES')
+        opciones = wx.Menu()
+        salir = wx.Menu()
+        #-------------------------------------------------------------------------
+        opciones.Append(wx.ID_ABOUT, 'Opcion A', 'aqui se pone la opcion A')
+        wx.EVT_MENU(self,wx.ID_ABOUT, self.opcionA)
+        opciones.Append(wx.ID_ADD, 'Opcion B', 'aqui se pone la opcion B')
+        wx.EVT_MENU(self,wx.ID_ADD, self.opcionB)
+        salir.Append(wx.ID_EXIT, 'Quit', 'Quit application')
+        wx.EVT_MENU(self,wx.ID_EXIT, self.salir)
+
+        menubar.Append(opciones, 'OPCIONES')
+        menubar.Append(salir, 'SALIR')
         self.SetMenuBar(menubar)
+<<<<<<< HEAD
         self.Bind(wx.EVT_MENU, self.OnQuit, fileItemA)
         self.Bind(wx.EVT_MENU, self.OnQuit, fileItemB)
         self.Bind(wx.EVT_MENU, self.OnQuit, fileItem)
+=======
+
+        #self.Bind(wx.EVT_MENU, self.OnQuit, fileSalir)
+>>>>>>> 65def85bfad3a3f4671199f3dfc69c46534c6839
         self.Centre()
 
-    def OnQuit(self, e):
-        self.Close()
+    def opcionA(self,event):#creditos
+        ventanaA=TestFrame(None)
+        ventanaA.Show(True)
+        #ventana.ShowModal()
+
+    def opcionB(self,event):#creditos
+        ventanaB=TestFrameB(None)
+        ventanaB.Show(True)
+
+    def salir(self,event):#Salir
+        salir=wx.MessageDialog(None, 'Chaup :,(','Salir', style=wx.OK)
+        salir.ShowModal()
+        self.Close(True)
+        #-------------------------------------------------------------------
+
+
+
 
 class Operaciones(wx.Panel):
     def __init__(self, parent):
@@ -451,12 +659,21 @@ class Operaciones(wx.Panel):
             wx.MessageBox("ERROR: Alguna Casilla Esta Vacia")
         else:
             #print(msg1)
+<<<<<<< HEAD
             SEL=select(msg1)
             print(SEL)
             where(SEL,msg2)
             Res=MyPanel3(self)
             Res.ShowModal()
             Res.Destroy()
+=======
+            sel=select(msg1)
+            #print(msg2)
+            where(sel,msg2)
+
+
+
+>>>>>>> 65def85bfad3a3f4671199f3dfc69c46534c6839
 
 class MyPanel1(wx.Panel):
    def __init__(self, parent):
@@ -473,11 +690,17 @@ class MyPanel2(wx.Panel):
 
 class MyPanel3(wx.Dialog):
    def __init__(self, parent):
+<<<<<<< HEAD
       #super(MyPanel3, self).__init__(parent)
       #lbl = wx.StaticText(self, label="Aca sale el resultado <3 ", pos=(15,30))
       wx.Dialog.__init__(self, parent,-1,title="Resultado",size=(1090, 500))
       grid = Tabla_Resultados(self)
       self.Centre()
+=======
+      super(MyPanel3, self).__init__(parent)
+      #lbl = wx.StaticText(self, label="Aca sale el resultado <3 ", pos=(15,30))
+      grid = Tabla_Resultados(self)
+>>>>>>> 65def85bfad3a3f4671199f3dfc69c46534c6839
 
 if __name__ == '__main__':
     AbrirArchivo()
