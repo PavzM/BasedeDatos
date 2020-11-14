@@ -459,7 +459,6 @@ class TestFrameB(wx.Frame):
         self.Centre()
 
     def opcionA(self,event):#creditos
-        self.Close(True)
         ventana=TestFrame(None)
         ventana.Show(True)
         self.Close(True)
@@ -504,7 +503,6 @@ class TestFrame(wx.Frame):
         self.Centre()
 
     def opcionB(self,event):#creditos
-        self.Close(True)
         ventanaB=TestFrameB(None)
         ventanaB.Show(True)
         self.Close(True)
