@@ -462,9 +462,10 @@ class TestFrameB(wx.Frame):
         self.Close(True)
         ventana=TestFrame(None)
         ventana.Show(True)
+        self.Close(True)
 
     def salir(self,event):#Salir
-        salir=wx.MessageDialog(None, 'Chaup :,(','Salir', style=wx.OK)
+        salir=wx.MessageDialog(None, 'Chaup :\'(','Salir', style=wx.OK)
         salir.ShowModal()
         self.Close(True)
         #-------------------------------------------------------------------
@@ -506,9 +507,10 @@ class TestFrame(wx.Frame):
         self.Close(True)
         ventanaB=TestFrameB(None)
         ventanaB.Show(True)
+        self.Close(True)
 
     def salir(self,event):#Salir
-        salir=wx.MessageDialog(None, 'Chaup :,(','Salir', style=wx.OK)
+        salir=wx.MessageDialog(None, 'Chaup :\'(','Salir', style=wx.OK)
         salir.ShowModal()
         self.Close(True)
         #-------------------------------------------------------------------
