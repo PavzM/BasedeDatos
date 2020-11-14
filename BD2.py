@@ -49,7 +49,9 @@ L_VAL = []
 
 def AbrirArchivo():
     """Esta función es para cargar la tabla desde un archivo"""
-    archivo = open('','r')#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt
+    archivo = open('','r')
+    """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt
+    """BARDO"""#c:/Users/Lenovo/Desktop/Python/basededatos.txt
     formato = archivo.readline().rstrip()
     formato = formato.split(',')
     lin = []
@@ -86,7 +88,9 @@ def AbrirArchivo():
     archivo.close()
 #------------------------------------------------------------------------------------------
 def Diccionario():
-    archivo = open('','r')#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt
+    archivo = open('','r')
+    """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt
+    """BARDO"""#c:/Users/Lenovo/Desktop/Python/basededatos.txt
     cadena = archivo.readline().rstrip()
     cadena= cadena.split(',')#aqui estan las palabras de los campos con las posiciones
     lin=[]
@@ -455,6 +459,7 @@ class TestFrameB(wx.Frame):
         self.Centre()
 
     def opcionA(self,event):#creditos
+        self.Close(True)
         ventana=TestFrame(None)
         ventana.Show(True)
 
@@ -498,6 +503,7 @@ class TestFrame(wx.Frame):
         self.Centre()
 
     def opcionB(self,event):#creditos
+        self.Close(True)
         ventanaB=TestFrameB(None)
         ventanaB.Show(True)
 
@@ -526,9 +532,32 @@ class Operaciones(wx.Panel):
         self.Limpiar.Bind(wx.EVT_BUTTON,self.OnClicked)
 
     def OnClicked(self,event):
-        sel = [0]
         global filas
         global columnas
+        global sel
+        global EMPLOYEE_ID_R
+        global FIRST_NAME_R
+        global LAST_NAME_R 
+        global EMAIL_R 
+        global PHONE_NUMBER_R 
+        global HIRE_DATE_R 
+        global JOB_ID_R 
+        global SALARY_R 
+        global COMMISSION_PCT_R 
+        global MANAGER_ID_R 
+        global DEPARTMENT_ID_R 
+        EMPLOYEE_ID_R.clear()
+        FIRST_NAME_R.clear()
+        LAST_NAME_R.clear()
+        EMAIL_R.clear()
+        PHONE_NUMBER_R .clear()
+        HIRE_DATE_R.clear()
+        JOB_ID_R.clear()
+        SALARY_R.clear()
+        COMMISSION_PCT_R.clear()
+        MANAGER_ID_R.clear()
+        DEPARTMENT_ID_R.clear()
+        sel = [0]
         filas = [0]
         columnas = [0]
         self.Text_Enter.Clear()
