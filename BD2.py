@@ -49,7 +49,7 @@ L_VAL = []
 
 def AbrirArchivo():
     """Esta función es para cargar la tabla desde un archivo"""
-    archivo = open('','r')#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt
+    archivo = open('C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt','r')#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt
     formato = archivo.readline().rstrip()
     formato = formato.split(',')
     lin = []
@@ -86,7 +86,7 @@ def AbrirArchivo():
     archivo.close()
 #------------------------------------------------------------------------------------------
 def Diccionario():
-    archivo = open('','r')#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt
+    archivo = open('C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt','r')#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt
     cadena = archivo.readline().rstrip()
     cadena= cadena.split(',')#aqui estan las palabras de los campos con las posiciones
     lin=[]
@@ -457,9 +457,10 @@ class TestFrameB(wx.Frame):
     def opcionA(self,event):#creditos
         ventana=TestFrame(None)
         ventana.Show(True)
+        self.Close(True)
 
     def salir(self,event):#Salir
-        salir=wx.MessageDialog(None, 'Chaup :,(','Salir', style=wx.OK)
+        salir=wx.MessageDialog(None, 'Chaup :\'(','Salir', style=wx.OK)
         salir.ShowModal()
         self.Close(True)
         #-------------------------------------------------------------------
@@ -500,6 +501,7 @@ class TestFrame(wx.Frame):
     def opcionB(self,event):#creditos
         ventanaB=TestFrameB(None)
         ventanaB.Show(True)
+        self.Close(True)
 
     def salir(self,event):#Salir
         salir=wx.MessageDialog(None, 'Chaup :,(','Salir', style=wx.OK)
