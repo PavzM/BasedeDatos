@@ -105,3 +105,4 @@ EMPLOYEE_ID,1,6,FIRST_NAME,7,26,LAST_NAME,27,51,EMAIL,52,76,PHONE_NUMBER,77,96,H
    203               Susan                   Mavris                  SMAVRIS        515.123.777707/06/94    HR_REP    6500       101    40
    204             Hermann                     Baer                    HBAER        515.123.888807/06/94    PR_REP   10000       101    70
    205             Shelley                  Higgins                 SHIGGINS        515.123.808007/06/94    AC_MGR   12000       101   110
+   206             William                    Gietz                   WGIETZ        515.123.818107/06/94AC_ACCOUNT    8300       205   110

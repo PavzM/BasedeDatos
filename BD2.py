@@ -354,7 +354,7 @@ class Tabla_Resultados(wx.grid.Grid):
 class SimpleGrid(wx.grid.Grid):
     def __init__(self, parent):
         wx.grid.Grid.__init__(self, parent, -1)
-        self.CreateGrid(106, 11)
+        self.CreateGrid(107, 11)
     #------------------------------------------------------Columnas
         self.SetColLabelValue(0, "EMPLOYEE_ID")
         self.SetColLabelValue(1, "FIRST_NAME")
