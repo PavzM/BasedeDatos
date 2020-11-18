@@ -52,7 +52,7 @@ def AbrirArchivo():
     global nombre_tabla
     """Esta función es para cargar la tabla desde un archivo"""
     archivo = open('','r')
-    """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt
+    """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/Employees.txt
     """BARDO"""#c:/Users/Lenovo/Desktop/Python/basededatos.txt
     formato = archivo.readline().rstrip()
     formato = formato.split(',')
@@ -93,7 +93,7 @@ def AbrirArchivo():
 #------------------------------------------------------------------------------------------
 def Diccionario():
     archivo = open('','r')
-    """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt
+    """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/Employees.txt
     """BARDO"""#c:/Users/Lenovo/Desktop/Python/basededatos.txt
     cadena = archivo.readline().rstrip()
     cadena= cadena.split(',')#aqui estan las palabras de los campos con las posiciones
@@ -355,6 +355,58 @@ class Tabla_Resultados(wx.grid.Grid):
                     self.SetCellValue(j, i, DEPARTMENT_ID_R[j])
 
 
+#------------------------TABLA RESULTADOS--------------------------------
+class Tabla_Select(wx.grid.Grid):
+    def __init__(self, parent):
+        wx.grid.Grid.__init__(self, parent, -1)
+        ##----------------------Columnas
+        if sel[0]=="*":
+            self.CreateGrid(len(EMPLOYEE_ID),11)
+            self.HazTabla(seltoda)
+        else:
+            self.CreateGrid(len(EMPLOYEE_ID),columnas[0])
+            self.HazTabla(sel)
+        self.AutoSize()
+        self.EnableEditing(False)
+        self.DisableDragGridSize()
+
+    def EnableEditing(self, edit):
+        return super().EnableEditing(edit)
+
+    def AutoSize(self):
+        return super().AutoSize()
+
+    def DisableDragGridSize(self):
+        return super().DisableDragGridSize()
+
+    def HazTabla(self,renglones):
+        for i in range(0,len(renglones)):
+            self.SetColLabelValue(i, renglones[i].upper())
+            for j in range(0,len(EMPLOYEE_ID)):
+                if renglones[i].upper() == "EMPLOYEE_ID":
+                    self.SetCellValue(j, i, EMPLOYEE_ID[j])
+                elif renglones[i].upper() == "FIRST_NAME":
+                    self.SetCellValue(j, i, FIRST_NAME[j])
+                elif renglones[i].upper() == "LAST_NAME":
+                    self.SetCellValue(j, i, LAST_NAME[j])
+                elif renglones[i].upper() == "EMAIL":
+                    self.SetCellValue(j, i, EMAIL[j])
+                elif renglones[i].upper() == "PHONE_NUMBER":
+                    self.SetCellValue(j, i, PHONE_NUMBER[j])
+                elif renglones[i].upper() == "HIRE_DATE":
+                    self.SetCellValue(j, i, HIRE_DATE[j])
+                elif renglones[i].upper() == "JOB_ID":
+                    self.SetCellValue(j, i, JOB_ID[j])
+                elif renglones[i].upper() == "SALARY":
+                    self.SetCellValue(j, i, SALARY[j])
+                elif renglones[i].upper() == "COMMISSION_PCT":
+                    self.SetCellValue(j, i, COMMISSION_PCT[j])
+                elif renglones[i].upper() == "MANAGER_ID":
+                    self.SetCellValue(j, i, MANAGER_ID[j])
+                elif renglones[i].upper() == "DEPARTMENT_ID":
+                    self.SetCellValue(j, i, DEPARTMENT_ID[j])
+
+
 #----------------------TABLA--------------------------------------------#
 class SimpleGrid(wx.grid.Grid):
     def __init__(self, parent):
@@ -578,9 +630,11 @@ class Operaciones(wx.Panel):
             sel.clear()
             SEL=select(msg1)
             where(SEL,msg2)
+            Select=MyPanel4(self)
+            Select.Show()
             Res=MyPanel3(self)
-            Res.ShowModal()
-            Res.Destroy()
+            Res.Show()
+            #Res.Destroy()
 
 class MyPanel1(wx.Panel):
    def __init__(self, parent):
@@ -597,8 +651,14 @@ class MyPanel2(wx.Panel):
 
 class MyPanel3(wx.Dialog):
    def __init__(self, parent):
-      wx.Dialog.__init__(self, parent,-1,title="Resultado",size=(1090, 500))
+      wx.Dialog.__init__(self, parent,-1,title="TABLA RESULTADO DE SELECT Y WHERE",size=(1090, 500))
       grid = Tabla_Resultados(self)
+      self.Centre()
+
+class MyPanel4(wx.Dialog):
+   def __init__(self, parent):
+      wx.Dialog.__init__(self, parent,-1,title="TABLA RESULTADO DE SELECT",size=(1090, 500))
+      grid = Tabla_Select(self)
       self.Centre()
 
 if __name__ == '__main__':
