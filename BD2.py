@@ -9,6 +9,7 @@ Practica de Bases de Datos. NRC:31505
 import wx
 import wx.grid
 
+nombre_tabla = [0]
 EMPLOYEE_ID = []
 FIRST_NAME = []
 LAST_NAME = []
@@ -48,12 +49,15 @@ I_VAL = []
 L_VAL = []
 
 def AbrirArchivo():
+    global nombre_tabla
     """Esta función es para cargar la tabla desde un archivo"""
     archivo = open('','r')
     """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt
     """BARDO"""#c:/Users/Lenovo/Desktop/Python/basededatos.txt
     formato = archivo.readline().rstrip()
     formato = formato.split(',')
+    nombre_tabla[0]=(formato[0])
+    formato.pop(0)
     lin = []
     tam = []
     ind = 0
@@ -93,6 +97,7 @@ def Diccionario():
     """BARDO"""#c:/Users/Lenovo/Desktop/Python/basededatos.txt
     cadena = archivo.readline().rstrip()
     cadena= cadena.split(',')#aqui estan las palabras de los campos con las posiciones
+    cadena.pop(0)
     lin=[]
     ind=0
     src=0
@@ -435,7 +440,7 @@ class TestFrameB(wx.Frame):
         page = wx.SplitterWindow(Notebook)
         page2 = MyPanel2(Notebook)
         page3 = MyPanel3(Notebook)
-        Notebook.AddPage(page,"EMPLOYEES")
+        Notebook.AddPage(page,nombre_tabla[0])
         Notebook.AddPage(page2,"DICCIONARIO")
         Notebook.AddPage(page3,"RESULTADO")
         panelTabla = SimpleGridEmpty(page)
@@ -478,7 +483,7 @@ class TestFrame(wx.Frame):
         Notebook = wx.Notebook(self)
         page = wx.SplitterWindow(Notebook)
         page2 = MyPanel2(Notebook)
-        Notebook.AddPage(page,"EMPLOYEES")
+        Notebook.AddPage(page,nombre_tabla[0])
         Notebook.AddPage(page2,"DICCIONARIO")
         panelTabla = SimpleGrid(page)
         panelOper = Operaciones(page)
@@ -522,7 +527,7 @@ class Operaciones(wx.Panel):
         self.Text_Enter.SetForegroundColour(wx.BLUE)
         self.Bind(wx.EVT_TEXT_ENTER, self.Txt_Ent, id=2)
         lbl2 = wx.StaticText(self, label="FROM ", pos=(15,70))
-        self.staticname = wx.TextCtrl(self, style=wx.TE_READONLY ,value="EMPLOYEES", pos=(65, 65), size=(180,-1))
+        self.staticname = wx.TextCtrl(self, style=wx.TE_READONLY ,value=nombre_tabla[0], pos=(65, 65), size=(180,-1))
         lbl3 = wx.StaticText(self, label="WHERE ", pos=(15,110))
         self.Text_Enter_1= wx.TextCtrl(self,2,style=wx.TE_PROCESS_ENTER, pos=(65, 105), size=(180,-1))
         self.Text_Enter_1.SetForegroundColour(wx.BLUE)
