@@ -51,13 +51,8 @@ L_VAL = []
 def AbrirArchivo():
     global nombre_tabla
     """Esta función es para cargar la tabla desde un archivo"""
-<<<<<<< HEAD
-    archivo = open('/home/pavz/Documents/GitHub/BaseDeDAtos/basededatos.txt','r')
-    """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt
-=======
     archivo = open('','r')
-    """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/Employees.txt
->>>>>>> 7cd0562253112d5ede17448ae431e835283b153e
+    """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt
     """BARDO"""#c:/Users/Lenovo/Desktop/Python/basededatos.txt
     formato = archivo.readline().rstrip()
     formato = formato.split(',')
@@ -97,13 +92,8 @@ def AbrirArchivo():
     archivo.close()
 #------------------------------------------------------------------------------------------
 def Diccionario():
-<<<<<<< HEAD
-    archivo = open('/home/pavz/Documents/GitHub/BaseDeDAtos/basededatos.txt','r')
-    """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt
-=======
     archivo = open('','r')
-    """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/Employees.txt
->>>>>>> 7cd0562253112d5ede17448ae431e835283b153e
+    """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt
     """BARDO"""#c:/Users/Lenovo/Desktop/Python/basededatos.txt
     cadena = archivo.readline().rstrip()
     cadena= cadena.split(',')#aqui estan las palabras de los campos con las posiciones
