@@ -15,7 +15,7 @@ Departments,DEPARTMENT_ID,1,4,DEPARTMENT_NAME,5,34,MANAGER_ID,35,40,LOCATION_ID,
  140            Control And Credit      1700
  150          Shareholder Services      1700
  160                      Benefits      1700
- 170                 Manufacturing	    1700
+ 170                 Manufacturing      1700
  180                  Construction      1700
  190                   Contracting      1700
  200                    Operations      1700
