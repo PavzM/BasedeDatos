@@ -10,6 +10,7 @@ import wx
 import wx.grid
 
 nombre_tabla = [0]
+nombre_tabla_b = [0]
 EMPLOYEE_ID = []
 FIRST_NAME = []
 LAST_NAME = []
@@ -21,6 +22,12 @@ SALARY = []
 COMMISSION_PCT = []
 MANAGER_ID = []
 DEPARTMENT_ID = []
+
+#DATOS PARA LA PARTE B
+DEPARTMENT_ID_B = []
+DEPARTMENT_NAME_B = []
+MANAGER_ID_B = []
+LOCATION_ID_B=[]
 
 #Listas Para Mostrar el Resultado
 EMPLOYEE_ID_R = []
@@ -47,13 +54,17 @@ LENGHT = []
 TYPE = []
 I_VAL = []
 L_VAL = []
+##Diccionario 2(departments)
+FIELD2 = []
+INI_P2 = []
+TAM_FIELD2 = []
 
 def AbrirArchivo():
     global nombre_tabla
     """Esta función es para cargar la tabla desde un archivo"""
-    archivo = open('','r')
-    """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt
-    """BARDO"""#c:/Users/Lenovo/Desktop/Python/basededatos.txt
+    archivo = open('c:/Users/Lenovo/Desktop/Python/Employees.txt','r')
+    """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/Employees.txt
+    """BARDO"""#c:/Users/Lenovo/Desktop/Python/Employees.txt
     formato = archivo.readline().rstrip()
     formato = formato.split(',')
     nombre_tabla[0]=(formato[0])
@@ -91,10 +102,45 @@ def AbrirArchivo():
 
     archivo.close()
 #------------------------------------------------------------------------------------------
+def AbrirArchivoDep():
+    global nombre_tabla_b
+    """Esta función es para cargar la tabla desde un archivo"""
+    archivo = open('c:/Users/Lenovo/Desktop/Python/Departments.txt','r')
+    """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/Departments.txt
+    """BARDO"""#c:/Users/Lenovo/Desktop/Python/Departments.txt
+    formato = archivo.readline().rstrip()
+    formato = formato.split(',')
+    nombre_tabla_b[0]=(formato[0])
+    formato.pop(0)
+    lin = []
+    tam = []
+    ind = 0
+    for part in formato:
+        if part.isnumeric():
+            lin.append(int(part))
+            if ind > 0 and not (ind%2)==0:
+                tam.append(lin[ind] - (lin[ind-1]-1))
+            ind = ind + 1
+    laCompleta = []
+    while True:
+        linea = archivo.readline().rstrip()#Debemos leer por número de caracteres
+        if not linea: #Fin del Archivo
+            break
+        i=0
+        for ind,campo in enumerate(tam):
+            laCompleta.append(linea[i:(i+tam[ind])])
+            i=i+tam[ind]
+        DEPARTMENT_ID_B.append(laCompleta[0].replace(' ', ''))
+        DEPARTMENT_NAME_B.append(laCompleta[1].replace(' ', ''))
+        MANAGER_ID_B.append(laCompleta[2].replace(' ', ''))
+        LOCATION_ID_B.append(laCompleta[3].replace(' ', ''))
+        laCompleta.clear()
+    archivo.close()
+#-------------------------------------------------------------------------------
 def Diccionario():
-    archivo = open('','r')
-    """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt
-    """BARDO"""#c:/Users/Lenovo/Desktop/Python/basededatos.txt
+    archivo = open('c:/Users/Lenovo/Desktop/Python/Employees.txt','r')
+    """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/Employees.txt
+    """BARDO"""#c:/Users/Lenovo/Desktop/Python/Employees.txt
     cadena = archivo.readline().rstrip()
     cadena= cadena.split(',')#aqui estan las palabras de los campos con las posiciones
     cadena.pop(0)
@@ -122,6 +168,38 @@ def Diccionario():
     #esta parte requiere de los datos pasados a tabla
     archivo.close()
 #------------------------------------------------------------------------------
+def Diccionario2():
+    archivo = open('c:/Users/Lenovo/Desktop/Python/Departments.txt','r')
+    """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/Departments.txt
+    """BARDO"""#c:/Users/Lenovo/Desktop/Python/Departments.txt
+    cadena = archivo.readline().rstrip()
+    cadena= cadena.split(',')#aqui estan las palabras de los campos con las posiciones
+    cadena.pop(0)
+    lin=[]
+    ind=0
+    src=0
+    i=0
+    j=0
+    for imp in cadena:
+        if imp.isnumeric():
+            lin.append(int(imp))
+            if ind > 0 and not (ind%2)==0:
+                TAM_FIELD2.append(str(lin[ind] - (lin[ind-1]-1)))
+            ind = ind + 1
+        else:
+            FIELD2.append(imp)
+    for port in cadena:
+        if port.isnumeric():
+            if  (src%2)==0:
+                num=int(port)-1
+                INI_P2.append(str(num))
+                src=src+1
+            else:
+                src=src+1
+    #esta parte requiere de los datos pasados a tabla
+    archivo.close()
+#------------------------------------------------------------------------------
+
 def imprime(SEL, index):
     for el in SEL:
         if el.upper() == "EMPLOYEE_ID":
@@ -163,6 +241,12 @@ def select(valor):
     sel = valor.split(',')
     columnas[0] = len(sel)
     return sel
+
+def selectB(valor):
+    global selB
+    selB = valor.split(',')
+    columnasB[0] = len(selB)
+    return selB
 
 def toda(index):
     EMPLOYEE_ID_R.append(EMPLOYEE_ID[index])
@@ -295,6 +379,47 @@ class Diccionario_1(wx.grid.Grid):
         self.SetCellValue(8, 6,"1.0")
         self.SetCellValue(9, 6,"10000")
         self.SetCellValue(10, 6,"10000")
+
+    def EnableEditing(self, edit):
+        return super().EnableEditing(edit)
+
+    def AutoSize(self):
+        return super().AutoSize()
+
+    def DisableDragGridSize(self):
+        return super().DisableDragGridSize()
+
+
+class Diccionario_2(wx.grid.Grid):
+    def __init__(self, parent):
+        wx.grid.Grid.__init__(self, parent, -1)
+        self.CreateGrid(len(FIELD2),7)
+    #------------------------------------------------------Columnas
+        self.SetColLabelValue(0, "FIELD_NAME")
+        self.SetColLabelValue(1, "INITIAL_POSITON")
+        self.SetColLabelValue(2, "LENGHT")
+        self.SetColLabelValue(3, "TYPE")
+        self.SetColLabelValue(4, "INITIAL_VALUE")
+        self.SetColLabelValue(5, "LOWEST_VALUE")
+        self.SetColLabelValue(6, "HIGHEST_VALUE")
+    #-------------------------------------------------------------
+        for i in range(0,len(FIELD2)):
+            self.SetCellValue(i, 0, FIELD2[i])
+            self.SetCellValue(i, 1, INI_P2[i])
+            self.SetCellValue(i, 2, TAM_FIELD2[i])
+        self.SetCellValue(0, 3,"NUMBER")
+        self.SetCellValue(1, 3,"VARCHAR")
+        self.SetCellValue(2, 3,"NUMBER")
+        self.SetCellValue(3, 3,"NUMBER")
+        self.SetCellValue(0, 4,"0000001")
+        self.SetCellValue(2, 4,"0000001")
+        self.SetCellValue(3, 4,"0000001")
+        self.SetCellValue(0, 5,"0000001")
+        self.SetCellValue(2, 5,"0000001")
+        self.SetCellValue(3, 5,"0000001")
+        self.SetCellValue(0, 6,"1000000")
+        self.SetCellValue(2, 6,"1000000")
+        self.SetCellValue(3, 6,"1000000")
 
     def EnableEditing(self, edit):
         return super().EnableEditing(edit)
@@ -451,23 +576,23 @@ class SimpleGrid(wx.grid.Grid):
     def DisableDragGridSize(self):
         return super().DisableDragGridSize()
 
-
-class SimpleGridEmpty(wx.grid.Grid):
+class SimpleGrid_2(wx.grid.Grid): #TABLA DE DEPARTMENTS
     def __init__(self, parent):
         wx.grid.Grid.__init__(self, parent, -1)
-        self.CreateGrid(10, 11)
+        self.CreateGrid(27, 4)
     #------------------------------------------------------Columnas
-        self.SetColLabelValue(0, "EMPLOYEE_ID")
-        self.SetColLabelValue(1, "FIRST_NAME")
-        self.SetColLabelValue(2, "LAST_NAME")
-        self.SetColLabelValue(3, "EMAIL")
-        self.SetColLabelValue(4, "PHONE_NUMBER")
-        self.SetColLabelValue(5, "HIRE_DATE")
-        self.SetColLabelValue(6, "JOB_ID")
-        self.SetColLabelValue(7, "SALARY")
-        self.SetColLabelValue(8, "COMMISSION_PCT")
-        self.SetColLabelValue(9, "MANAGER_ID")
-        self.SetColLabelValue(10, "DEPARTMENT_ID")
+        self.SetColLabelValue(0, "DEPARTMENT_ID")
+        self.SetColLabelValue(1, "DEPARTMENT_NAME")
+        self.SetColLabelValue(2, "MANAGER_ID")
+        self.SetColLabelValue(3, "LOCATION_ID")
+
+    #-------------------------------------------------------------
+        for i in range(0,len(DEPARTMENT_ID_B)):
+            self.SetCellValue(i, 0, DEPARTMENT_ID_B[i])
+            self.SetCellValue(i, 1, DEPARTMENT_NAME_B[i])
+            self.SetCellValue(i, 2, MANAGER_ID_B[i])
+            self.SetCellValue(i, 3, LOCATION_ID_B[i])
+
         self.AutoSize()
         self.EnableEditing(False)
         self.DisableDragGridSize()
@@ -482,7 +607,7 @@ class SimpleGridEmpty(wx.grid.Grid):
         return super().DisableDragGridSize()
 
 
-class TestFrameB(wx.Frame):
+class TestFrameB(wx.Frame): #Parte_B
     def __init__(self, parent):
         wx.Frame.__init__(self, parent, -1, "PROYECTO BASE DE DATOS OPCION B ^u^", size=(1090, 500))
         self.InitUI()
@@ -490,14 +615,18 @@ class TestFrameB(wx.Frame):
     def InitUI(self):
         Notebook = wx.Notebook(self)
         page = wx.SplitterWindow(Notebook)
-        page2 = MyPanel2(Notebook)
-        page3 = MyPanel3(Notebook)
-        Notebook.AddPage(page,nombre_tabla[0])
-        Notebook.AddPage(page2,"DICCIONARIO")
-        Notebook.AddPage(page3,"RESULTADO")
-        panelTabla = SimpleGridEmpty(page)
-        panelOper = Operaciones(page)
-        page.SplitHorizontally( panelOper, panelTabla)
+        hSplitter = wx.SplitterWindow(page)
+        page2 = MyPanel2(Notebook)#DICCIONARIO EMPLOYEES
+        page3 = PanelDic(Notebook)#DICCIONARIO DEPARTMENTS
+        Notebook.AddPage(page,f"{nombre_tabla[0]} and {nombre_tabla_b[0]}")
+        Notebook.AddPage(page2,"DICC. EMPLOYEES")
+        Notebook.AddPage(page3,"DICC. DEPARTMENTS")#DICCIONARIO DEPARTMENTS
+        panelTablaEmp = SimpleGrid(hSplitter)#Tabla EMPLOYEES
+        panelTablaDep = SimpleGrid_2(hSplitter)#Tabla DEPARTMENTS
+        panelOper = Operaciones(page)#Cambiar y hacer otro
+        hSplitter.SplitVertically(panelTablaEmp,panelTablaDep)
+        hSplitter.SetSashGravity(0.5)
+        page.SplitHorizontally( panelOper, hSplitter)
         page.SetSashGravity(0.35)
         sizer = wx.BoxSizer(wx.VERTICAL)
         sizer.Add(Notebook, 1, wx.EXPAND)
@@ -661,9 +790,19 @@ class MyPanel4(wx.Dialog):
       grid = Tabla_Select(self)
       self.Centre()
 
+class PanelDic(wx.Panel):
+   def __init__(self, parent):
+      super(PanelDic, self).__init__(parent)
+      grid = Diccionario_2(self)
+      grid.AutoSize()
+      grid.EnableEditing(False)
+      grid.DisableDragGridSize()
+
 if __name__ == '__main__':
     AbrirArchivo()
+    AbrirArchivoDep()
     Diccionario()
+    Diccionario2()
     app = wx.App()
     frame = TestFrame(None)
     frame.Show(True)
