@@ -49,7 +49,7 @@ L_VAL = []
 
 def AbrirArchivo():
     """Esta función es para cargar la tabla desde un archivo"""
-    archivo = open('','r')
+    archivo = open('/home/pavz/Documents/GitHub/BaseDeDAtos/basededatos.txt','r')
     """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt
     """BARDO"""#c:/Users/Lenovo/Desktop/Python/basededatos.txt
     formato = archivo.readline().rstrip()
@@ -88,7 +88,7 @@ def AbrirArchivo():
     archivo.close()
 #------------------------------------------------------------------------------------------
 def Diccionario():
-    archivo = open('','r')
+    archivo = open('/home/pavz/Documents/GitHub/BaseDeDAtos/basededatos.txt','r')
     """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/basededatos.txt
     """BARDO"""#c:/Users/Lenovo/Desktop/Python/basededatos.txt
     cadena = archivo.readline().rstrip()
@@ -537,15 +537,15 @@ class Operaciones(wx.Panel):
         global sel
         global EMPLOYEE_ID_R
         global FIRST_NAME_R
-        global LAST_NAME_R 
-        global EMAIL_R 
-        global PHONE_NUMBER_R 
-        global HIRE_DATE_R 
-        global JOB_ID_R 
-        global SALARY_R 
-        global COMMISSION_PCT_R 
-        global MANAGER_ID_R 
-        global DEPARTMENT_ID_R 
+        global LAST_NAME_R
+        global EMAIL_R
+        global PHONE_NUMBER_R
+        global HIRE_DATE_R
+        global JOB_ID_R
+        global SALARY_R
+        global COMMISSION_PCT_R
+        global MANAGER_ID_R
+        global DEPARTMENT_ID_R
         EMPLOYEE_ID_R.clear()
         FIRST_NAME_R.clear()
         LAST_NAME_R.clear()
