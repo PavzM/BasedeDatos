@@ -1,4 +1,4 @@
-Departments,DEPARTMENT_ID,1,4,DEPARTMENT_NAME,5,34,MANAGER_ID,35,40,LOCATION_ID,41,44
+departments,DEPARTMENT_ID,1,4,DEPARTMENT_NAME,5,34,MANAGER_ID,35,40,LOCATION_ID,41,44
   10                Administration   2001700
   20                     Marketing   2011800
   30                    Purchasing   1141700
