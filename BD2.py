@@ -86,7 +86,7 @@ TAM_FIELD2 = []
 def AbrirArchivo():
     global nombre_tabla
     """Esta función es para cargar la tabla desde un archivo"""
-    archivo = open('c:/Users/Lenovo/Desktop/Python/Employees.txt','r')
+    archivo = open('','r')
     """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/Employees.txt
     """BARDO"""#c:/Users/Lenovo/Desktop/Python/Employees.txt
     """PAVEL"""#/home/pavz/Desktop/Employees.txt
@@ -130,7 +130,7 @@ def AbrirArchivo():
 def AbrirArchivoDep():
     global nombre_tabla_b
     """Esta función es para cargar la tabla desde un archivo"""
-    archivo = open('c:/Users/Lenovo/Desktop/Python/Departments.txt','r')
+    archivo = open('','r')
     """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/Departments.txt
     """BARDO"""#c:/Users/Lenovo/Desktop/Python/Departments.txt
     """PAVEL"""#/home/pavz/Desktop/Departments.txt
@@ -164,7 +164,7 @@ def AbrirArchivoDep():
     archivo.close()
 #-------------------------------------------------------------------------------
 def Diccionario():
-    archivo = open('c:/Users/Lenovo/Desktop/Python/Employees.txt','r')
+    archivo = open('','r')
     """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/Employees.txt
     """BARDO"""#c:/Users/Lenovo/Desktop/Python/Employees.txt
     cadena = archivo.readline().rstrip()
@@ -195,7 +195,7 @@ def Diccionario():
     archivo.close()
 #------------------------------------------------------------------------------
 def Diccionario2():
-    archivo = open('c:/Users/Lenovo/Desktop/Python/Departments.txt','r')
+    archivo = open('','r')
     """ASAEL"""#C:/Users/User/OneDrive/Escritorio/python-course/Progs/BasedeDatos/Departments.txt
     """BARDO"""#c:/Users/Lenovo/Desktop/Python/Departments.txt
     cadena = archivo.readline().rstrip()
@@ -273,7 +273,7 @@ def selectB(valor):
     RES_SEL.clear()
     selB = valor.split(',')
     if selB[0]=="*":
-        RES_SEL = seltodaB
+        RES_SEL = ["EMPLOYEE_ID", "FIRST_NAME", "LAST_NAME", "EMAIL", "PHONE_NUMBER", "HIRE_DATE", "JOB_ID", "SALARY", "COMMISSION_PCT", "MANAGER_ID", "DEPARTMENT_ID","DEPARTMENT_ID_B","DEPARTMENT_NAME","MANAGER_ID_B","LOCATION_ID"]
     else:
         for i in range(0,len(selB)):
             selB[i] = selB[i].split('.')#SE DIVIDE EN MATRIZ
@@ -327,8 +327,8 @@ def toda(index):
     DEPARTMENT_ID_R.append(DEPARTMENT_ID[index])
     filas[0]=len(DEPARTMENT_ID_R)
     columnas[0]=11
-
-def where_B(valor2):#Forma de introducir: where Empleados.department_id=Departments.department_id; valor2 recibe del cuadro
+#Forma de introducir: where Empleados.department_id=Departments.department_id; valor2 recibe del cuadro
+def where_B(valor2):
     T1 = []
     T2 = []
     global EMPLOYEE_ID_WR
@@ -993,7 +993,8 @@ class TestFrameB(wx.Frame): #Parte_B
         panelTablaDep = SimpleGrid_2(hSplitter)#Tabla DEPARTMENTS
         hSplitter.SplitVertically(panelTablaEmp,panelTablaDep)
         hSplitter.SetSashGravity(0.5)
-        page.SplitHorizontally( panelOper, hSplitter)
+        panelOper = OperacionesB(page)
+        page.SplitHorizontally(panelOper, hSplitter)
         page.SetSashGravity(0.35)
         sizer = wx.BoxSizer(wx.VERTICAL)
         sizer.Add(Notebook, 1, wx.EXPAND)
