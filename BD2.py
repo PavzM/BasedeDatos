@@ -280,6 +280,7 @@ def selectB(valor):
         for i in range(0,len(selB)):
             if selB[i][0] == nombre_tabla[0]:
                 if selB[i][1].upper() == "EMPLOYEE_ID":
+                    RES_SEL.append('EMPLOYEE_ID')
                 elif selB[i][1].upper() == "FIRST_NAME":
                     RES_SEL.append('FIRST_NAME')
                 elif selB[i][1].upper() == "LAST_NAME":
